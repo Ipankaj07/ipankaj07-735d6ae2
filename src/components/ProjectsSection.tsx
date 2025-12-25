@@ -116,7 +116,7 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-24 relative" ref={ref}>
-      <div className="container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -147,20 +147,20 @@ const ProjectsSection = () => {
               {/* Skeleton overlay */}
               {skeletonMode && (
                 <div className="absolute inset-0 pointer-events-none z-10">
-                  {/* Corner markers */}
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-neon-cyan animate-pulse" />
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-neon-cyan animate-pulse" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-neon-cyan animate-pulse" />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon-cyan animate-pulse" />
+                  {/* Corner markers - now using primary green */}
+                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary animate-pulse" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary animate-pulse" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary animate-pulse" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary animate-pulse" />
                   
                   {/* Center crosshair */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-8 h-px bg-neon-cyan animate-pulse" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-8 bg-neon-cyan animate-pulse" />
+                    <div className="w-8 h-px bg-primary animate-pulse" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-8 bg-primary animate-pulse" />
                   </div>
                   
                   {/* Dimension labels */}
-                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-neon-cyan font-mono">
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-primary font-mono">
                     {`<div.project-${index + 1}>`}
                   </div>
                 </div>

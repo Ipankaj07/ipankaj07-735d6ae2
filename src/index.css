@@ -349,10 +349,46 @@
     font-family: 'Inter', sans-serif;
   }
 
-  /* Skeleton mode for inspect effect */
+  /* Skeleton mode for inspect effect - using primary green */
   .skeleton-mode {
-    @apply border-2 border-neon-cyan !important;
-    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.5),
-                inset 0 0 20px hsl(var(--neon-cyan) / 0.1) !important;
+    @apply border-2 border-primary !important;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.6),
+                0 0 40px hsl(var(--primary) / 0.3),
+                inset 0 0 15px hsl(var(--primary) / 0.1) !important;
+  }
+
+  /* Hero name animation */
+  @keyframes heroGlow {
+    0%, 100% { 
+      text-shadow: 0 0 20px hsl(var(--primary) / 0.8),
+                   0 0 40px hsl(var(--primary) / 0.6),
+                   0 0 60px hsl(var(--primary) / 0.4);
+    }
+    50% { 
+      text-shadow: 0 0 30px hsl(var(--primary) / 1),
+                   0 0 60px hsl(var(--primary) / 0.8),
+                   0 0 100px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  .hero-name-glow {
+    animation: heroGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes letterSlideIn {
+    0% { 
+      opacity: 0;
+      transform: translateY(50px) rotateX(-90deg);
+    }
+    100% { 
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+  }
+
+  .letter-animate {
+    display: inline-block;
+    animation: letterSlideIn 0.6s ease-out forwards;
+    opacity: 0;
   }
 }
