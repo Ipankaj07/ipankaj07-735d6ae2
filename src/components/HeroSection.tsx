@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
 const HeroSection = () => {
+  const firstName = "Pankaj";
+  const lastName = "Raj";
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Background Grid */}
@@ -12,8 +15,8 @@ const HeroSection = () => {
       <div className="absolute top-1/3 right-20 w-3 h-3 bg-primary/50 rounded-full float" style={{ animationDelay: "1s" }} />
       <div className="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-primary/70 rounded-full float" style={{ animationDelay: "2s" }} />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+        <div className="max-w-3xl">
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -38,20 +41,71 @@ const HeroSection = () => {
             </span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.8, duration: 0.6 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-glow"
-          >
-            <span className="text-primary">Pankaj</span>{" "}
-            <span className="text-foreground">Raj</span>
-          </motion.h1>
+          {/* Animated Name */}
+          <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 overflow-hidden">
+            <motion.span 
+              className="inline-block hero-name-glow text-primary"
+              initial={{ opacity: 0, y: 100, rotateX: -90 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ delay: 2.8, duration: 0.8, ease: "easeOut" }}
+            >
+              {firstName.split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: 2.9 + index * 0.08, 
+                    duration: 0.4,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{ 
+                    scale: 1.2, 
+                    color: "hsl(142, 70%, 60%)",
+                    textShadow: "0 0 30px hsl(142, 70%, 60%)",
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.span>
+            <span className="inline-block w-4" />
+            <motion.span 
+              className="inline-block text-foreground"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 3.4, duration: 0.6 }}
+            >
+              {lastName.split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: 3.5 + index * 0.1, 
+                    duration: 0.4,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{ 
+                    scale: 1.2, 
+                    color: "hsl(142, 70%, 45%)",
+                    textShadow: "0 0 20px hsl(142, 70%, 45%)",
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.span>
+          </div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.9, duration: 0.6 }}
+            transition={{ delay: 3.8, duration: 0.6 }}
             className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-display mb-8"
           >
             Full-Stack <span className="text-primary">Developer</span>
@@ -61,7 +115,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3, duration: 0.6 }}
+            transition={{ delay: 3.9, duration: 0.6 }}
             className="terminal-window max-w-2xl mb-10"
           >
             <div className="terminal-header">
@@ -88,7 +142,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.1, duration: 0.6 }}
+            transition={{ delay: 4.0, duration: 0.6 }}
             className="flex flex-wrap gap-4 mb-12"
           >
             <a
@@ -109,7 +163,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.2, duration: 0.6 }}
+            transition={{ delay: 4.1, duration: 0.6 }}
             className="flex items-center gap-6"
           >
             <a
@@ -151,7 +205,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.5, duration: 0.6 }}
+          transition={{ delay: 4.5, duration: 0.6 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2 text-muted-foreground">

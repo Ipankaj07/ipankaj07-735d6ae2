@@ -36,7 +36,7 @@ const EducationSection = () => {
 
   return (
     <section id="education" className="py-24 relative" ref={ref}>
-      <div className="container mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
