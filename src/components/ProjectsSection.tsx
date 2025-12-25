@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Github, ExternalLink, Folder } from "lucide-react";
+import { Github, ExternalLink, Folder, X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const projects = [
   {
@@ -90,6 +96,7 @@ const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [skeletonMode, setSkeletonMode] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -140,7 +147,8 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
-              className={`terminal-window group hover:border-primary/50 transition-all duration-300 card-hover relative ${
+              onClick={() => setSelectedProject(project)}
+              className={`terminal-window group hover:border-primary/50 transition-all duration-300 card-hover relative cursor-pointer ${
                 skeletonMode ? "skeleton-mode" : ""
               }`}
             >
@@ -176,6 +184,7 @@ const ProjectsSection = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="text-muted-foreground hover:text-primary transition-colors"
                       aria-label="View source code"
                     >
@@ -187,6 +196,7 @@ const ProjectsSection = () => {
                       href={project.external}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="text-muted-foreground hover:text-primary transition-colors"
                       aria-label="View live project"
                     >
@@ -241,6 +251,63 @@ const ProjectsSection = () => {
             View All on GitHub
           </a>
         </motion.div>
+
+        {/* Project Detail Modal */}
+        <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
+          <DialogContent className="terminal-window border-primary/30 max-w-lg">
+            <DialogHeader>
+              <div className="flex items-center gap-3 mb-2">
+                <Folder size={24} className="text-primary" />
+                <DialogTitle className="text-xl text-primary">{selectedProject?.title}</DialogTitle>
+              </div>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <p className="text-muted-foreground leading-relaxed">
+                {selectedProject?.description}
+              </p>
+              
+              <div>
+                <h4 className="text-sm text-primary mb-2 font-mono">TECHNOLOGIES:</h4>
+                <ul className="flex flex-wrap gap-2">
+                  {selectedProject?.tech.map((tech) => (
+                    <li
+                      key={tech}
+                      className="text-xs px-2 py-1 border border-primary/30 text-primary rounded-sm bg-primary/5"
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="flex gap-4 pt-4 border-t border-border">
+                {selectedProject?.github && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-sm hover:bg-primary/10 transition-colors"
+                  >
+                    <Github size={16} />
+                    View Code
+                  </a>
+                )}
+                {selectedProject?.external && (
+                  <a
+                    href={selectedProject.external}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    Live Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
