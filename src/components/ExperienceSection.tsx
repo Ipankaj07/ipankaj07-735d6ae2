@@ -1,15 +1,31 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Building2, Calendar, MapPin } from "lucide-react";
+import { ExternalLink, Building2, Calendar, MapPin, Briefcase } from "lucide-react";
 
 const experiences = [
   {
+    company: "Yubi (CredAvenue)",
+    role: "Software Development Engineer",
+    period: "August 2022 - Present",
+    location: "Chennai, India",
+    url: "https://www.go-yubi.com/",
+    current: true,
+    responsibilities: [
+      "Developing and maintaining scalable web applications using React.js and modern frontend technologies",
+      "Building robust backend services and RESTful APIs using Java SpringBoot",
+      "Collaborating with cross-functional teams to design and implement new features for fintech products",
+      "Optimizing application performance and ensuring code quality through code reviews and testing",
+      "Contributing to the architecture and technical decisions for product improvements",
+    ],
+  },
+  {
     company: "OneCode",
-    role: "SD Intern",
+    role: "Software Development Intern",
     period: "May - August 2022",
     location: "Bangalore, India",
     url: "https://www.onecode.in/",
+    current: false,
     responsibilities: [
       "Involved in all stages of software development lifecycle: development, debugging, and testing",
       "Architected and implemented the front-end of OneCode Falcon feature — an embeddable web application that lets users log in and add complete details to use company offers and services",
@@ -39,21 +55,25 @@ const ExperienceSection = () => {
           </h2>
         </motion.div>
 
-        <div className="max-w-3xl">
+        <div className="max-w-3xl space-y-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.company}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
               className="relative"
             >
               {/* Timeline Line */}
               <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent ml-3" />
               
               {/* Timeline Dot */}
-              <div className="absolute left-0 top-2 w-7 h-7 rounded-full bg-background border-2 border-primary flex items-center justify-center pulse-glow">
-                <Building2 size={14} className="text-primary" />
+              <div className={`absolute left-0 top-2 w-7 h-7 rounded-full bg-background border-2 border-primary flex items-center justify-center ${exp.current ? 'pulse-glow' : ''}`}>
+                {exp.current ? (
+                  <Briefcase size={14} className="text-primary" />
+                ) : (
+                  <Building2 size={14} className="text-primary" />
+                )}
               </div>
 
               <div className="ml-14 terminal-window">
@@ -64,6 +84,11 @@ const ExperienceSection = () => {
                   <span className="ml-4 text-xs text-muted-foreground">
                     work_history.log
                   </span>
+                  {exp.current && (
+                    <span className="ml-auto text-xs text-primary border border-primary/50 px-2 py-0.5 rounded-sm bg-primary/10">
+                      CURRENT
+                    </span>
+                  )}
                 </div>
 
                 <div className="p-6">
@@ -103,7 +128,7 @@ const ExperienceSection = () => {
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{
                           duration: 0.4,
-                          delay: 0.4 + respIndex * 0.1,
+                          delay: 0.4 + index * 0.2 + respIndex * 0.1,
                         }}
                         className="flex items-start gap-3 text-muted-foreground text-sm"
                       >
