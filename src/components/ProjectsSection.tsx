@@ -17,6 +17,7 @@ const projects = [
     tech: ["EJS", "CSS", "JavaScript", "MongoDB", "ExpressJS"],
     github: "https://github.com/taherahmed14/Groww_Full-Stack_Project",
     external: "https://groww-project.herokuapp.com/home",
+    image: "https://raw.githubusercontent.com/taherahmed14/Groww_Full-Stack_Project/master/screenshots/home.png",
   },
   {
     title: "Nike Clone",
@@ -25,6 +26,7 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/Ipankaj07/Nike-clone",
     external: "https://ipankaj07.github.io/Nike-clone/",
+    image: "https://raw.githubusercontent.com/Ipankaj07/Nike-clone/main/screenshot.png",
   },
   {
     title: "GitHub User Search",
@@ -33,6 +35,7 @@ const projects = [
     tech: ["React", "GitHub API", "CSS"],
     github: "https://github.com/Ipankaj07/github-uzer",
     external: null,
+    image: null,
   },
   {
     title: "Imgur Giphy",
@@ -41,6 +44,7 @@ const projects = [
     tech: ["React", "Giphy API", "CSS"],
     github: "https://github.com/Ipankaj07/imgur-giphy",
     external: null,
+    image: null,
   },
   {
     title: "YouTube Clone",
@@ -49,6 +53,7 @@ const projects = [
     tech: ["React", "YouTube API", "Google Console", "CSS"],
     github: "https://github.com/Ipankaj07/Youtube",
     external: null,
+    image: null,
   },
   {
     title: "Weather App",
@@ -57,6 +62,7 @@ const projects = [
     tech: ["React", "Weather API", "CSS"],
     github: "https://github.com/Ipankaj07/weather-app",
     external: null,
+    image: null,
   },
   {
     title: "File Uploader",
@@ -65,6 +71,7 @@ const projects = [
     tech: ["React", "Node.js", "Cloud Storage"],
     github: "https://github.com/Ipankaj07/file-uploader",
     external: null,
+    image: null,
   },
   {
     title: "Postman Clone",
@@ -73,6 +80,7 @@ const projects = [
     tech: ["React", "Axios", "JavaScript"],
     github: "https://github.com/Ipankaj07/postman-clone",
     external: null,
+    image: null,
   },
   {
     title: "The Platinum Portfolio",
@@ -81,6 +89,7 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/Ipankaj07/the-platinum",
     external: null,
+    image: null,
   },
   {
     title: "Apartment Flats Manager",
@@ -89,6 +98,7 @@ const projects = [
     tech: ["React", "Node.js", "MongoDB"],
     github: "https://github.com/Ipankaj07/Apartment-Flats-Manager",
     external: null,
+    image: null,
   },
 ];
 
@@ -97,6 +107,7 @@ const ProjectsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [skeletonMode, setSkeletonMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [imageError, setImageError] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -263,6 +274,18 @@ const ProjectsSection = () => {
             </DialogHeader>
             
             <div className="space-y-4">
+              {/* Project Preview Image */}
+              {selectedProject?.image && !imageError[selectedProject.title] && (
+                <div className="rounded-md overflow-hidden border border-primary/20">
+                  <img
+                    src={selectedProject.image}
+                    alt={`${selectedProject.title} preview`}
+                    className="w-full h-auto object-cover"
+                    onError={() => setImageError(prev => ({ ...prev, [selectedProject.title]: true }))}
+                  />
+                </div>
+              )}
+              
               <p className="text-muted-foreground leading-relaxed">
                 {selectedProject?.description}
               </p>
