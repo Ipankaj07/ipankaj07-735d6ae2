@@ -44,29 +44,55 @@ const AboutSection = () => {
                 <div className="terminal-dot bg-primary" />
                 <span className="ml-4 text-xs text-muted-foreground">bio.md</span>
               </div>
-              <div className="p-6 space-y-4 text-muted-foreground">
-                <p className="leading-relaxed">
-                  Hello! I'm <span className="text-primary font-semibold">Pankaj</span>, 
-                  a Full-Stack Developer with <span className="text-primary">2+ years</span> of 
-                  experience building scalable web applications and cross-platform solutions.
-                </p>
-                <p className="leading-relaxed">
-                  Currently at <span className="text-primary">ValuEnable</span>, I architected 
-                  the <span className="text-primary">Content Engine</span> from scratch — a 
-                  policy retention platform now used by <span className="text-primary">2,000+ places</span> including 
-                  top Indian insurers like Axis Max Life, ABSLI, and Bajaj Allianz Life.
-                </p>
-                <p className="leading-relaxed">
-                  I specialize in <span className="text-primary">React</span>, 
-                  <span className="text-primary"> Node.js</span>, 
-                  <span className="text-primary"> AWS</span> (S3, EC2, Lambda, DynamoDB), and 
-                  <span className="text-primary"> Flutter</span>. I've built WhatsApp bots, 
-                  optimized 200K+ report downloads, and mentored junior developers.
-                </p>
-                <p className="leading-relaxed">
-                  Graduate of <span className="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) 
-                  and <span className="text-primary">Maharshi Dayanand University</span> (B.Tech CSE, 2024).
-                </p>
+              <div className="p-6 flex gap-6">
+                {/* Agent Style Photo */}
+                <div className="hidden sm:block flex-shrink-0">
+                  <div className="relative w-24 h-28">
+                    {/* Scanning corners */}
+                    <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary" />
+                    <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary" />
+                    <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-primary" />
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary" />
+                    {/* Photo */}
+                    <img
+                      src="https://pankaj-raj.vercel.app/static/1a54191bfe81380550be08e0025794ca/25f3c/2p88zt9c.jpg"
+                      alt="Agent Pankaj"
+                      className="w-full h-full object-cover grayscale"
+                    />
+                    {/* Overlay scanline */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/10" />
+                    {/* ID text */}
+                    <div className="absolute -bottom-4 left-0 right-0 text-center">
+                      <span className="text-[8px] text-primary font-mono tracking-widest">ID: AGENT-07</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Bio content */}
+                <div className="space-y-4 text-muted-foreground flex-1">
+                  <p className="leading-relaxed typewriter-text">
+                    Hello! I'm <span className="text-primary font-semibold">Pankaj</span>, 
+                    a Full-Stack Developer with <span className="text-primary">2+ years</span> of 
+                    experience building scalable web applications and cross-platform solutions.
+                  </p>
+                  <p className="leading-relaxed">
+                    Currently at <span className="text-primary">ValuEnable</span>, I architected 
+                    the <span className="text-primary">Content Engine</span> from scratch — a 
+                    policy retention platform now used by <span className="text-primary">2,000+ places</span> including 
+                    top Indian insurers like Axis Max Life, ABSLI, and Bajaj Allianz Life.
+                  </p>
+                  <p className="leading-relaxed">
+                    I specialize in <span className="text-primary">React</span>, 
+                    <span className="text-primary"> Node.js</span>, 
+                    <span className="text-primary"> AWS</span> (S3, EC2, Lambda, DynamoDB), and 
+                    <span className="text-primary"> Flutter</span>. I've built WhatsApp bots, 
+                    optimized 200K+ report downloads, and mentored junior developers.
+                  </p>
+                  <p className="leading-relaxed">
+                    Graduate of <span className="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) 
+                    and <span className="text-primary">Maharshi Dayanand University</span> (B.Tech CSE, 2024).
+                  </p>
+                </div>
               </div>
             </div>
 
