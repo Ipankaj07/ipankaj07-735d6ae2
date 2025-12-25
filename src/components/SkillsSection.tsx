@@ -188,42 +188,43 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Tech Marquee */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 overflow-hidden border-y border-border py-4"
-        >
-          <div className="flex animate-marquee">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex shrink-0">
-                {[
-                  "REACT",
-                  "JAVASCRIPT",
-                  "TYPESCRIPT",
-                  "NODE.JS",
-                  "MONGODB",
-                  "EXPRESS",
-                  "GIT",
-                  "TAILWIND",
-                  "JAVA",
-                  "SPRINGBOOT",
-                  "AWS",
-                  "FLUTTER",
-                ].map((tech, index) => (
-                  <span
-                    key={`${i}-${index}`}
-                    className="mx-8 text-2xl font-bold text-muted-foreground/30 hover:text-primary/50 transition-colors duration-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
+
+      {/* Full Width Tech Marquee - Outside container */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="mt-16 overflow-hidden border-y border-border py-6 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+      >
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="flex shrink-0 items-center">
+              {[
+                "REACT",
+                "JAVASCRIPT",
+                "TYPESCRIPT",
+                "NODE.JS",
+                "MONGODB",
+                "EXPRESS",
+                "GIT",
+                "TAILWIND",
+                "JAVA",
+                "SPRINGBOOT",
+                "AWS",
+                "FLUTTER",
+              ].map((tech, index) => (
+                <span
+                  key={`${i}-${index}`}
+                  className="mx-12 text-3xl md:text-4xl font-bold text-muted-foreground/20 hover:text-primary/50 transition-colors duration-300 tracking-widest"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };

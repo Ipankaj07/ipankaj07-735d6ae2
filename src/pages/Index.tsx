@@ -10,6 +10,8 @@ import SkillsSection from "@/components/SkillsSection";
 import EducationSection from "@/components/EducationSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import MatrixBackground from "@/components/MatrixBackground";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
@@ -32,6 +34,9 @@ const Index = () => {
 
       {/* Main Content */}
       <div className={`min-h-screen bg-background ${bootComplete ? "opacity-100" : "opacity-0"} transition-opacity duration-500`}>
+        {/* Matrix Background */}
+        <MatrixBackground />
+        
         {/* Scanline Overlay */}
         <div className="fixed inset-0 pointer-events-none scanlines z-40" />
         
@@ -44,12 +49,30 @@ const Index = () => {
         {/* Main Content */}
         <main>
           <HeroSection />
-          <AboutSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <EducationSection />
-          <ContactSection />
+          
+          <ScrollReveal>
+            <AboutSection />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <ExperienceSection />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <ProjectsSection />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <SkillsSection />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <EducationSection />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <ContactSection />
+          </ScrollReveal>
         </main>
 
         {/* Footer */}
