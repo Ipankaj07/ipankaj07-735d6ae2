@@ -44,10 +44,10 @@ const AboutSection = () => {
                 <div className="terminal-dot bg-primary" />
                 <span className="ml-4 text-xs text-muted-foreground">bio.md</span>
               </div>
-              <div className="p-6 flex gap-6">
+              <div className="p-6 flex flex-col sm:flex-row gap-6">
                 {/* Agent Style Photo - visible on all screens */}
-                <div className="flex-shrink-0">
-                  <div className="relative w-20 h-24 sm:w-24 sm:h-28">
+                <div className="flex-shrink-0 self-center sm:self-start">
+                  <div className="relative w-24 h-28">
                     {/* Scanning corners */}
                     <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary" />
                     <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary" />
@@ -69,7 +69,7 @@ const AboutSection = () => {
                 </div>
                 
                 {/* Bio content */}
-                <div className="space-y-4 text-muted-foreground flex-1">
+                <div className="space-y-4 text-muted-foreground flex-1 mt-4 sm:mt-0">
                   <p className="leading-relaxed typewriter-text">
                     Hello! I'm <span className="text-primary font-semibold">Pankaj</span>, 
                     a Full-Stack Developer with <span className="text-primary">2+ years</span> of 
