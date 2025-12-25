@@ -127,7 +127,7 @@ const ProjectsSection = () => {
           <h2 className="text-2xl md:text-3xl font-bold">
             <span className="text-primary">03.</span> Projects
           </h2>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="hidden md:block text-sm text-muted-foreground mt-2">
             Press <kbd className="px-2 py-1 bg-primary/20 border border-primary/30 rounded text-primary text-xs">Space</kbd> for skeleton view
           </p>
         </motion.div>
@@ -196,23 +196,28 @@ const ProjectsSection = () => {
                 </div>
               </div>
 
-              <div className="p-5">
-                <Folder size={40} className="text-primary mb-4" />
-                <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+              <div className="p-4 md:p-5">
+                <Folder size={32} className="text-primary mb-3 md:mb-4 md:w-10 md:h-10" />
+                <h4 className="text-base md:text-lg font-semibold text-foreground mb-1.5 md:mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h4>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                <p className="text-muted-foreground text-xs md:text-sm mb-3 md:mb-4 line-clamp-2 md:line-clamp-3">
                   {project.description}
                 </p>
-                <ul className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
+                <ul className="flex flex-wrap gap-1.5 md:gap-2">
+                  {project.tech.slice(0, 3).map((tech) => (
                     <li
                       key={tech}
-                      className="text-xs px-2 py-1 border border-primary/30 text-primary rounded-sm bg-primary/5"
+                      className="text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 md:py-1 border border-primary/30 text-primary rounded-sm bg-primary/5"
                     >
                       {tech}
                     </li>
                   ))}
+                  {project.tech.length > 3 && (
+                    <li className="text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 md:py-1 text-muted-foreground">
+                      +{project.tech.length - 3}
+                    </li>
+                  )}
                 </ul>
               </div>
             </motion.div>

@@ -1,5 +1,46 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [started, setStarted] = useState(false);
+  
+  useEffect(() => {
+    const startTimer = setTimeout(() => setStarted(true), delay * 1000);
+    return () => clearTimeout(startTimer);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayText(text.slice(0, index + 1));
+      index++;
+      if (index >= text.length) clearInterval(interval);
+    }, 20);
+    
+    return () => clearInterval(interval);
+  }, [started, text]);
+
+  const highlightKeywords = (str: string) => {
+    const keywords = ["React", "Node.js", "AWS", "Flutter", "ValuEnable", "2,000+", "Axis Max Life", "Bajaj Allianz"];
+    let result = str;
+    keywords.forEach(keyword => {
+      result = result.replace(new RegExp(keyword, 'g'), `<span class="text-primary">${keyword}</span>`);
+    });
+    return result;
+  };
+
+  return (
+    <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+      <span className="text-primary">$ </span>
+      <span dangerouslySetInnerHTML={{ __html: highlightKeywords(displayText) }} />
+      {displayText.length < text.length && <span className="animate-pulse text-primary">▊</span>}
+    </p>
+  );
+};
 
 const HeroSection = () => {
   const firstName = "Pankaj";
@@ -42,7 +83,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Animated Name */}
-          <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 overflow-hidden">
+          <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 py-2">
             <motion.span 
               className="inline-block hero-name-glow text-primary"
               initial={{ opacity: 0, y: 100, rotateX: -90 }}
@@ -125,16 +166,10 @@ const HeroSection = () => {
               <span className="ml-4 text-xs text-muted-foreground">about.sh</span>
             </div>
             <div className="p-4">
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                <span className="text-primary">$ </span>
-                2+ years of experience building scalable web applications with
-                <span className="text-primary"> React</span>,
-                <span className="text-primary"> Node.js</span>,
-                <span className="text-primary"> AWS</span>, and
-                <span className="text-primary"> Flutter</span>. Currently at ValuEnable, 
-                architecting insurance solutions used by 2,000+ companies including 
-                Axis Max Life & Bajaj Allianz.
-              </p>
+              <TypewriterText 
+                text="2+ years of experience building scalable web applications with React, Node.js, AWS, and Flutter. Currently at ValuEnable, architecting insurance solutions used by 2,000+ companies including Axis Max Life & Bajaj Allianz."
+                delay={4.0}
+              />
             </div>
           </motion.div>
 
@@ -201,22 +236,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 4.5, duration: 0.6 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-xs tracking-widest">SCROLL</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-px h-8 bg-gradient-to-b from-primary to-transparent"
-            />
-          </div>
-        </motion.div>
       </div>
     </section>
   );
