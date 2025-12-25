@@ -5,18 +5,20 @@ import { ExternalLink, Building2, Calendar, MapPin, Briefcase } from "lucide-rea
 
 const experiences = [
   {
-    company: "Yubi (CredAvenue)",
-    role: "Software Development Engineer",
-    period: "August 2022 - Present",
-    location: "Chennai, India",
-    url: "https://www.go-yubi.com/",
+    company: "ValuEnable Private Limited",
+    role: "Full Stack Developer",
+    period: "January 2023 - Present",
+    location: "Remote / India",
+    url: "https://valuenable.in/",
     current: true,
     responsibilities: [
-      "Developing and maintaining scalable web applications using React.js and modern frontend technologies",
-      "Building robust backend services and RESTful APIs using Java SpringBoot",
-      "Collaborating with cross-functional teams to design and implement new features for fintech products",
-      "Optimizing application performance and ensuring code quality through code reviews and testing",
-      "Contributing to the architecture and technical decisions for product improvements",
+      "Architected and developed the Content Engine from scratch using React, Express, and MySQL, enabling policy retention and future-projection insights; now adopted by 2,000+ places including top Indian insurance companies such as Axis Max Life, ABSLI, Bajaj Allianz Life, and many more.",
+      "Led backend development for the AssureMe insurance application, collaborating closely with UI/UX teams and contributing cross-platform mobile features using Flutter.",
+      "Built and deployed a WhatsApp bot using AWS DynamoDB to manage user-specific messaging data and automate policy document generation.",
+      "Utilized and modified AWS services including S3, EC2, Lambda, CloudWatch, and SQS for cloud hosting, automation, and monitoring purposes across projects.",
+      "Refactored legacy codebases and implemented reusable components to improve performance, scalability, and maintainability across platforms.",
+      "Optimized large-scale data operations—supporting 200K+ report downloads—and significantly improved query efficiency for critical modules.",
+      "Mentored junior developers during onboarding and project ramp-up, while also proactively contributing solutions to team leads and seniors to accelerate feature implementation.",
     ],
   },
   {

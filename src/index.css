@@ -348,4 +348,11 @@
   .font-display {
     font-family: 'Inter', sans-serif;
   }
+
+  /* Skeleton mode for inspect effect */
+  .skeleton-mode {
+    @apply border-2 border-neon-cyan !important;
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.5),
+                inset 0 0 20px hsl(var(--neon-cyan) / 0.1) !important;
+  }
 }
