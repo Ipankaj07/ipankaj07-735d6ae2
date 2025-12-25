@@ -103,7 +103,7 @@ export default {
         },
         marquee: {
           from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(-33.33%)" },
         },
       },
       animation: {
@@ -115,7 +115,7 @@ export default {
         "scale-in": "scale-in 0.4s ease-out forwards",
         "slide-up": "slide-up 0.5s ease-out forwards",
         flicker: "flicker 3s ease-in-out infinite",
-        marquee: "marquee 20s linear infinite",
+        marquee: "marquee 25s linear infinite",
       },
     },
   },

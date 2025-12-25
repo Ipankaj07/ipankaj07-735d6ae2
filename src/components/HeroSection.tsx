@@ -2,6 +2,49 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 
+// Scramble decode effect for text
+const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: number; className?: string }) => {
+  const [displayText, setDisplayText] = useState("");
+  const chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  useEffect(() => {
+    const startTimer = setTimeout(() => {
+      let iteration = 0;
+      const totalIterations = text.length * 3;
+      
+      const interval = setInterval(() => {
+        const progress = Math.min(iteration / 3, text.length);
+        const revealed = Math.floor(progress);
+        
+        let result = "";
+        for (let i = 0; i < text.length; i++) {
+          if (i < revealed) {
+            result += text[i];
+          } else if (text[i] === " ") {
+            result += " ";
+          } else {
+            result += chars[Math.floor(Math.random() * chars.length)];
+          }
+        }
+        
+        setDisplayText(result);
+        iteration++;
+        
+        if (iteration >= totalIterations) {
+          setDisplayText(text);
+          clearInterval(interval);
+        }
+      }, 25);
+      
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    
+    return () => clearTimeout(startTimer);
+  }, [text, delay]);
+
+  return <span className={className}>{displayText || text.replace(/./g, "█")}</span>;
+};
+
 const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
   const [displayText, setDisplayText] = useState("");
   const [started, setStarted] = useState(false);
@@ -66,7 +109,7 @@ const HeroSection = () => {
             className="mb-6"
           >
             <span className="status-online text-sm text-primary">
-              STATUS: OPEN TO OPPORTUNITIES
+              <ScrambleText text="STATUS: OPEN TO OPPORTUNITIES" delay={2.6} />
             </span>
           </motion.div>
 
@@ -78,7 +121,7 @@ const HeroSection = () => {
             className="mb-4"
           >
             <span className="text-muted-foreground text-lg font-display">
-              Hello, I'm
+              <ScrambleText text="Hello, I'm" delay={2.7} />
             </span>
           </motion.div>
 
@@ -149,7 +192,7 @@ const HeroSection = () => {
             transition={{ delay: 3.8, duration: 0.6 }}
             className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-display mb-8"
           >
-            Full-Stack <span className="text-primary">Developer</span>
+            <ScrambleText text="Full-Stack" delay={3.8} /> <span className="text-primary"><ScrambleText text="Developer" delay={3.9} /></span>
           </motion.h2>
 
           {/* Description */}
@@ -173,22 +216,22 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Fixed for mobile in one line */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 4.0, duration: 0.6 }}
-            className="flex flex-wrap gap-4 mb-12"
+            className="flex gap-3 md:gap-4 mb-12"
           >
             <a
               href="#contact"
-              className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-sm hover:bg-primary/90 transition-all duration-300 box-glow hover:scale-105"
+              className="flex-1 md:flex-none px-4 md:px-8 py-3 bg-primary text-primary-foreground font-medium rounded-sm hover:bg-primary/90 transition-all duration-300 box-glow hover:scale-105 text-center text-sm md:text-base whitespace-nowrap"
             >
               Get In Touch
             </a>
             <a
               href="#projects"
-              className="px-8 py-3 border border-primary text-primary font-medium rounded-sm hover:bg-primary/10 transition-all duration-300 box-glow-hover"
+              className="flex-1 md:flex-none px-4 md:px-8 py-3 border border-primary text-primary font-medium rounded-sm hover:bg-primary/10 transition-all duration-300 box-glow-hover text-center text-sm md:text-base whitespace-nowrap"
             >
               View Projects
             </a>
