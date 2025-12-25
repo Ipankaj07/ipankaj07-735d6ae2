@@ -196,8 +196,9 @@ const SkillsSection = () => {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.8 }}
         className="mt-16 overflow-hidden border-y border-border py-6 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+        style={{ overflowX: 'hidden' }}
       >
-        <div className="flex animate-marquee whitespace-nowrap">
+        <div className="flex animate-marquee whitespace-nowrap" style={{ width: 'max-content' }}>
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex shrink-0 items-center">
               {[

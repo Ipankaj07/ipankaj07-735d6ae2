@@ -103,6 +103,25 @@
                 inset 0 0 20px hsl(var(--neon-green) / 0.15);
   }
 
+  /* Glitch effect */
+  .glitch-effect {
+    position: relative;
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); filter: none; }
+    20% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
+    40% { transform: translate(-2px, -2px); filter: hue-rotate(-90deg); }
+    60% { transform: translate(2px, 2px); filter: hue-rotate(45deg); }
+    80% { transform: translate(2px, -2px); filter: hue-rotate(-45deg); }
+  }
+
+  /* Fix horizontal overflow globally */
+  html, body {
+    overflow-x: hidden;
+  }
+
   /* Scanline effect */
   .scanlines::before {
     content: "";

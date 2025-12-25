@@ -29,13 +29,13 @@ const AboutSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-5 gap-12 items-start">
+        <div className="grid gap-12 items-start">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-3 space-y-6"
+            className="space-y-6"
           >
             <div className="terminal-window">
               <div className="terminal-header">
@@ -45,9 +45,9 @@ const AboutSection = () => {
                 <span className="ml-4 text-xs text-muted-foreground">bio.md</span>
               </div>
               <div className="p-6 flex gap-6">
-                {/* Agent Style Photo */}
-                <div className="hidden sm:block flex-shrink-0">
-                  <div className="relative w-24 h-28">
+                {/* Agent Style Photo - visible on all screens */}
+                <div className="flex-shrink-0">
+                  <div className="relative w-20 h-24 sm:w-24 sm:h-28">
                     {/* Scanning corners */}
                     <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary" />
                     <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary" />
@@ -128,34 +128,6 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="md:col-span-2"
-          >
-            <div className="relative group">
-              {/* Image Container */}
-              <div className="relative rounded-sm overflow-hidden border border-primary/30 box-glow">
-                <img
-                  src="https://pankaj-raj.vercel.app/static/1a54191bfe81380550be08e0025794ca/25f3c/2p88zt9c.jpg"
-                  alt="Pankaj Raj - Full Stack Developer"
-                  className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-all duration-500" />
-              </div>
-              
-              {/* Decorative Border */}
-              <div className="absolute -bottom-3 -right-3 w-full h-full border border-primary rounded-sm -z-10" />
-              
-              {/* Status Badge */}
-              <div className="absolute -top-3 -left-3 px-3 py-1 bg-card border border-primary rounded-sm text-xs">
-                <span className="text-primary">DEVELOPER_STATUS: ACTIVE</span>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
