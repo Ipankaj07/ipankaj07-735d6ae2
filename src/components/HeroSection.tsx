@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -42,10 +42,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.8, duration: 0.6 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-glow glitch"
-            data-text="Pankaj Raj"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-glow"
           >
-            Pankaj Raj
+            <span className="text-primary">Pankaj</span>{" "}
+            <span className="text-foreground">Raj</span>
           </motion.h1>
 
           <motion.h2
@@ -54,7 +54,7 @@ const HeroSection = () => {
             transition={{ delay: 2.9, duration: 0.6 }}
             className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-display mb-8"
           >
-            Full-Stack <span className="text-primary">Web Developer</span>
+            Full-Stack <span className="text-primary">Developer</span>
           </motion.h2>
 
           {/* Description */}
@@ -73,11 +73,13 @@ const HeroSection = () => {
             <div className="p-4">
               <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
                 <span className="text-primary">$ </span>
-                I build exceptional digital experiences. Currently focused on
+                2+ years of experience building scalable web applications with
                 <span className="text-primary"> React</span>,
-                <span className="text-primary"> Node.js</span>, and
-                <span className="text-primary"> MongoDB</span> — creating
-                scalable web applications with clean, maintainable code.
+                <span className="text-primary"> Node.js</span>,
+                <span className="text-primary"> AWS</span>, and
+                <span className="text-primary"> Flutter</span>. Currently at ValuEnable, 
+                architecting insurance solutions used by 2,000+ companies including 
+                Axis Max Life & Bajaj Allianz.
               </p>
             </div>
           </motion.div>

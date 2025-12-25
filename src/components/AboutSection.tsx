@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Music, Plane, MapPin } from "lucide-react";
+import { Code, Music, Plane, MapPin, Gamepad2 } from "lucide-react";
 
 const interests = [
   { icon: Code, label: "Explore Tech" },
   { icon: Music, label: "Music" },
   { icon: Plane, label: "Travelling" },
+  { icon: Gamepad2, label: "Gaming" },
 ];
 
 const AboutSection = () => {
@@ -45,20 +46,26 @@ const AboutSection = () => {
               </div>
               <div className="p-6 space-y-4 text-muted-foreground">
                 <p className="leading-relaxed">
-                  Hello! My name is <span className="text-primary font-semibold">Pankaj</span>. 
-                  I am an aspiring Full-Stack Web Developer located in India. Currently, I am 
-                  working with <span className="text-primary">React</span> and{" "}
-                  <span className="text-primary">JavaScript</span>.
+                  Hello! I'm <span className="text-primary font-semibold">Pankaj</span>, 
+                  a Full-Stack Developer with <span className="text-primary">2+ years</span> of 
+                  experience building scalable web applications and cross-platform solutions.
                 </p>
                 <p className="leading-relaxed">
-                  I'm also interested in <span className="text-primary">Node.js</span> and{" "}
-                  <span className="text-primary">MongoDB</span> for the backend, writing clean 
-                  code, and learning various other modern web technologies as well as modern 
-                  libraries and frameworks.
+                  Currently at <span className="text-primary">ValuEnable</span>, I architected 
+                  the <span className="text-primary">Content Engine</span> from scratch — a 
+                  policy retention platform now used by <span className="text-primary">2,000+ places</span> including 
+                  top Indian insurers like Axis Max Life, ABSLI, and Bajaj Allianz Life.
                 </p>
                 <p className="leading-relaxed">
-                  I hope I can be a part of your team after this journey. I'm passionate about 
-                  building products that make a difference and solve real-world problems.
+                  I specialize in <span className="text-primary">React</span>, 
+                  <span className="text-primary"> Node.js</span>, 
+                  <span className="text-primary"> AWS</span> (S3, EC2, Lambda, DynamoDB), and 
+                  <span className="text-primary"> Flutter</span>. I've built WhatsApp bots, 
+                  optimized 200K+ report downloads, and mentored junior developers.
+                </p>
+                <p className="leading-relaxed">
+                  Graduate of <span className="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) 
+                  and <span className="text-primary">Maharshi Dayanand University</span> (B.Tech CSE, 2024).
                 </p>
               </div>
             </div>
@@ -71,7 +78,7 @@ const AboutSection = () => {
               className="flex items-center gap-2 text-muted-foreground"
             >
               <MapPin size={16} className="text-primary" />
-              <span>India</span>
+              <span>India (Remote)</span>
             </motion.div>
 
             {/* Interests */}
@@ -82,7 +89,7 @@ const AboutSection = () => {
             >
               <h3 className="text-sm text-primary mb-4 tracking-wider">INTERESTED_IN:</h3>
               <div className="flex flex-wrap gap-3">
-                {interests.map((interest, index) => (
+                {interests.map((interest) => (
                   <div
                     key={interest.label}
                     className="flex items-center gap-2 px-4 py-2 border border-border rounded-sm bg-secondary/30 hover:border-primary/50 transition-colors duration-300"
