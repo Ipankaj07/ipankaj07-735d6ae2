@@ -2,18 +2,19 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// Scramble decode effect for text
+// Scramble decode effect for text with glitch
 const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: number; className?: string }) => {
   const [displayText, setDisplayText] = useState("");
+  const [isGlitching, setIsGlitching] = useState(false);
   const chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   useEffect(() => {
     const startTimer = setTimeout(() => {
       let iteration = 0;
-      const totalIterations = text.length * 3;
+      const totalIterations = text.length * 2; // Faster animation
       
       const interval = setInterval(() => {
-        const progress = Math.min(iteration / 3, text.length);
+        const progress = Math.min(iteration / 2, text.length);
         const revealed = Math.floor(progress);
         
         let result = "";
@@ -30,11 +31,17 @@ const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: nu
         setDisplayText(result);
         iteration++;
         
+        // Random glitch during animation
+        if (Math.random() > 0.85) {
+          setIsGlitching(true);
+          setTimeout(() => setIsGlitching(false), 50);
+        }
+        
         if (iteration >= totalIterations) {
           setDisplayText(text);
           clearInterval(interval);
         }
-      }, 25);
+      }, 15); // Faster speed
       
       return () => clearInterval(interval);
     }, delay * 1000);
@@ -42,7 +49,11 @@ const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: nu
     return () => clearTimeout(startTimer);
   }, [text, delay]);
 
-  return <span className={className}>{displayText || text.replace(/./g, "█")}</span>;
+  return (
+    <span className={`${className} ${isGlitching ? 'glitch-effect' : ''}`} data-text={displayText}>
+      {displayText || text.replace(/./g, "█")}
+    </span>
+  );
 };
 
 const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
