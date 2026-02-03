@@ -116,14 +116,12 @@ const TypewriterText = ({
 const HeroSection = () => {
   const { data } = usePortfolio();
   const { hero } = data;
-  const [primaryColor, setPrimaryColor] = useState("142, 70%, 60%");
   const [primaryGlow, setPrimaryGlow] = useState("142, 70%, 60%");
   const [primaryDark, setPrimaryDark] = useState("142, 70%, 45%");
 
   useEffect(() => {
     const updateColors = () => {
       setPrimaryGlow(getThemeColor("--neon-green-glow"));
-      setPrimaryColor(getThemeColor("--neon-green"));
       setPrimaryDark(getThemeColor("--primary"));
     };
 
