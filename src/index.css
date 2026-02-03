@@ -1,11 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
-  :root {
+  :root[data-theme="cyber"] {
+    color-scheme: dark;
     /* Cyberpunk Dark Theme */
     --background: 220 20% 4%;
     --foreground: 142 70% 60%;
@@ -45,6 +46,129 @@
     --terminal-bg: 220 20% 4%;
     --terminal-border: 142 40% 25%;
     --scanline: 142 70% 45%;
+  }
+
+  :root[data-theme="soft-black"] {
+    color-scheme: dark;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 92%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 92%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 92%;
+    
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 88%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 200 20% 85%;
+    --accent-foreground: 0 0% 8%;
+    
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 18%;
+    --ring: 200 15% 70%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 160 25% 55%;
+    --neon-green-glow: 160 30% 65%;
+    --neon-cyan: 190 25% 60%;
+    --neon-amber: 40 50% 60%;
+    --terminal-bg: 0 0% 8%;
+    --terminal-border: 0 0% 25%;
+    --scanline: 160 25% 55%;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --background: 0 0% 98%;
+    --foreground: 222 20% 12%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 12%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 12%;
+    
+    --primary: 220 80% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 30% 92%;
+    --secondary-foreground: 222 20% 20%;
+    
+    --muted: 210 30% 95%;
+    --muted-foreground: 222 10% 40%;
+    
+    --accent: 260 70% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 15% 85%;
+    --input: 210 20% 90%;
+    --ring: 220 80% 45%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 160 45% 35%;
+    --neon-green-glow: 160 60% 45%;
+    --neon-cyan: 190 70% 40%;
+    --neon-amber: 40 80% 45%;
+    --terminal-bg: 210 30% 96%;
+    --terminal-border: 210 15% 80%;
+    --scanline: 160 45% 35%;
+  }
+
+  :root[data-theme="blue"] {
+    color-scheme: dark;
+    --background: 222 35% 8%;
+    --foreground: 200 70% 85%;
+    
+    --card: 222 30% 12%;
+    --card-foreground: 200 70% 85%;
+    
+    --popover: 222 30% 12%;
+    --popover-foreground: 200 70% 85%;
+    
+    --primary: 200 80% 55%;
+    --primary-foreground: 222 35% 8%;
+    
+    --secondary: 222 25% 18%;
+    --secondary-foreground: 200 70% 85%;
+    
+    --muted: 222 25% 20%;
+    --muted-foreground: 210 40% 65%;
+    
+    --accent: 260 70% 60%;
+    --accent-foreground: 222 35% 8%;
+    
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 210 35% 25%;
+    --input: 222 25% 20%;
+    --ring: 200 80% 55%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 190 80% 55%;
+    --neon-green-glow: 190 80% 65%;
+    --neon-cyan: 180 80% 55%;
+    --neon-amber: 45 80% 55%;
+    --terminal-bg: 222 35% 8%;
+    --terminal-border: 210 35% 30%;
+    --scanline: 190 80% 55%;
   }
 }
 

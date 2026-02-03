@@ -12,6 +12,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import MatrixBackground from "@/components/MatrixBackground";
 import ScrollReveal from "@/components/ScrollReveal";
+import AdminPanel from "@/components/AdminPanel";
 
 const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
@@ -77,6 +78,8 @@ const Index = () => {
 
         {/* Footer */}
         <Footer />
+
+        <AdminPanel />
       </div>
     </>
   );
