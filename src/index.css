@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
-  :root {
+  :root[data-theme="cyber"] {
+    color-scheme: dark;
     /* Cyberpunk Dark Theme */
     --background: 220 20% 4%;
     --foreground: 142 70% 60%;
@@ -45,6 +47,339 @@
     --terminal-bg: 220 20% 4%;
     --terminal-border: 142 40% 25%;
     --scanline: 142 70% 45%;
+  }
+
+  :root[data-theme="soft-black"] {
+    color-scheme: dark;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 92%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 92%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 92%;
+    
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 88%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 200 20% 85%;
+    --accent-foreground: 0 0% 8%;
+    
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 18%;
+    --ring: 200 15% 70%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 160 25% 55%;
+    --neon-green-glow: 160 30% 65%;
+    --neon-cyan: 190 25% 60%;
+    --neon-amber: 40 50% 60%;
+    --terminal-bg: 0 0% 8%;
+    --terminal-border: 0 0% 25%;
+    --scanline: 160 25% 55%;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --background: 0 0% 98%;
+    --foreground: 222 20% 12%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 12%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 12%;
+    
+    --primary: 220 80% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 30% 92%;
+    --secondary-foreground: 222 20% 20%;
+    
+    --muted: 210 30% 95%;
+    --muted-foreground: 222 10% 40%;
+    
+    --accent: 260 70% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 15% 85%;
+    --input: 210 20% 90%;
+    --ring: 220 80% 45%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 160 45% 35%;
+    --neon-green-glow: 160 60% 45%;
+    --neon-cyan: 190 70% 40%;
+    --neon-amber: 40 80% 45%;
+    --terminal-bg: 210 30% 96%;
+    --terminal-border: 210 15% 80%;
+    --scanline: 160 45% 35%;
+  }
+
+  :root[data-theme="blue"] {
+    color-scheme: dark;
+    --background: 222 35% 8%;
+    --foreground: 200 70% 85%;
+    
+    --card: 222 30% 12%;
+    --card-foreground: 200 70% 85%;
+    
+    --popover: 222 30% 12%;
+    --popover-foreground: 200 70% 85%;
+    
+    --primary: 200 80% 55%;
+    --primary-foreground: 222 35% 8%;
+    
+    --secondary: 222 25% 18%;
+    --secondary-foreground: 200 70% 85%;
+    
+    --muted: 222 25% 20%;
+    --muted-foreground: 210 40% 65%;
+    
+    --accent: 260 70% 60%;
+    --accent-foreground: 222 35% 8%;
+    
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 210 35% 25%;
+    --input: 222 25% 20%;
+    --ring: 200 80% 55%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 190 80% 55%;
+    --neon-green-glow: 190 80% 65%;
+    --neon-cyan: 180 80% 55%;
+    --neon-amber: 45 80% 55%;
+    --terminal-bg: 222 35% 8%;
+    --terminal-border: 210 35% 30%;
+    --scanline: 190 80% 55%;
+  }
+
+  :root[data-theme="dracula"] {
+    color-scheme: dark;
+    /* Dracula Theme - Classic coder theme */
+    --background: 231 15% 16%;
+    --foreground: 60 30% 96%;
+    
+    --card: 231 15% 20%;
+    --card-foreground: 60 30% 96%;
+    
+    --popover: 231 15% 20%;
+    --popover-foreground: 60 30% 96%;
+    
+    --primary: 265 89% 78%;
+    --primary-foreground: 231 15% 16%;
+    
+    --secondary: 231 15% 25%;
+    --secondary-foreground: 60 30% 96%;
+    
+    --muted: 231 15% 28%;
+    --muted-foreground: 60 30% 80%;
+    
+    --accent: 14 100% 67%;
+    --accent-foreground: 231 15% 16%;
+    
+    --destructive: 0 100% 67%;
+    --destructive-foreground: 60 30% 96%;
+    
+    --border: 231 15% 30%;
+    --input: 231 15% 25%;
+    --ring: 265 89% 78%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 80 100% 50%;
+    --neon-green-glow: 80 100% 60%;
+    --neon-cyan: 197 100% 71%;
+    --neon-amber: 14 100% 67%;
+    --terminal-bg: 231 15% 16%;
+    --terminal-border: 265 89% 78%;
+    --scanline: 80 100% 50%;
+  }
+
+  :root[data-theme="nord"] {
+    color-scheme: dark;
+    /* Nord Theme - Arctic palette */
+    --background: 218 16% 22%;
+    --foreground: 216 17% 92%;
+    
+    --card: 218 16% 28%;
+    --card-foreground: 216 17% 92%;
+    
+    --popover: 218 16% 28%;
+    --popover-foreground: 216 17% 92%;
+    
+    --primary: 192 84% 60%;
+    --primary-foreground: 218 16% 22%;
+    
+    --secondary: 218 16% 35%;
+    --secondary-foreground: 216 17% 92%;
+    
+    --muted: 218 16% 38%;
+    --muted-foreground: 216 17% 72%;
+    
+    --accent: 163 100% 50%;
+    --accent-foreground: 218 16% 22%;
+    
+    --destructive: 354 100% 66%;
+    --destructive-foreground: 216 17% 92%;
+    
+    --border: 218 16% 40%;
+    --input: 218 16% 35%;
+    --ring: 192 84% 60%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 163 100% 50%;
+    --neon-green-glow: 163 100% 60%;
+    --neon-cyan: 192 84% 60%;
+    --neon-amber: 39 100% 60%;
+    --terminal-bg: 218 16% 22%;
+    --terminal-border: 192 84% 60%;
+    --scanline: 163 100% 50%;
+  }
+
+  :root[data-theme="monokai"] {
+    color-scheme: dark;
+    /* Monokai Theme - VSCode famous */
+    --background: 0 0% 10%;
+    --foreground: 0 0% 92%;
+    
+    --card: 0 0% 14%;
+    --card-foreground: 0 0% 92%;
+    
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 92%;
+    
+    --primary: 95 38% 62%;
+    --primary-foreground: 0 0% 10%;
+    
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 92%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
+    
+    --accent: 282 95% 65%;
+    --accent-foreground: 0 0% 10%;
+    
+    --destructive: 0 100% 67%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 18%;
+    --ring: 95 38% 62%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 95 38% 62%;
+    --neon-green-glow: 95 38% 72%;
+    --neon-cyan: 187 47% 55%;
+    --neon-amber: 38 99% 50%;
+    --terminal-bg: 0 0% 10%;
+    --terminal-border: 95 38% 62%;
+    --scanline: 95 38% 62%;
+  }
+
+  :root[data-theme="solarized-dark"] {
+    color-scheme: dark;
+    /* Solarized Dark Theme */
+    --background: 192 100% 12%;
+    --foreground: 192 17% 98%;
+    
+    --card: 192 100% 16%;
+    --card-foreground: 192 17% 98%;
+    
+    --popover: 192 100% 16%;
+    --popover-foreground: 192 17% 98%;
+    
+    --primary: 68 100% 56%;
+    --primary-foreground: 192 100% 12%;
+    
+    --secondary: 192 100% 20%;
+    --secondary-foreground: 192 17% 98%;
+    
+    --muted: 192 100% 24%;
+    --muted-foreground: 192 17% 85%;
+    
+    --accent: 203 100% 48%;
+    --accent-foreground: 192 100% 12%;
+    
+    --destructive: 1 79% 50%;
+    --destructive-foreground: 192 17% 98%;
+    
+    --border: 192 100% 28%;
+    --input: 192 100% 20%;
+    --ring: 68 100% 56%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 68 100% 56%;
+    --neon-green-glow: 68 100% 66%;
+    --neon-cyan: 203 100% 48%;
+    --neon-amber: 39 100% 50%;
+    --terminal-bg: 192 100% 12%;
+    --terminal-border: 68 100% 56%;
+    --scanline: 68 100% 56%;
+  }
+
+  :root[data-theme="gruvbox"] {
+    color-scheme: dark;
+    /* Gruvbox Dark Theme */
+    --background: 30 8% 16%;
+    --foreground: 60 13% 80%;
+    
+    --card: 30 8% 22%;
+    --card-foreground: 60 13% 80%;
+    
+    --popover: 30 8% 22%;
+    --popover-foreground: 60 13% 80%;
+    
+    --primary: 102 35% 68%;
+    --primary-foreground: 30 8% 16%;
+    
+    --secondary: 30 8% 28%;
+    --secondary-foreground: 60 13% 80%;
+    
+    --muted: 30 8% 32%;
+    --muted-foreground: 60 13% 68%;
+    
+    --accent: 25 83% 53%;
+    --accent-foreground: 30 8% 16%;
+    
+    --destructive: 10 100% 55%;
+    --destructive-foreground: 60 13% 90%;
+    
+    --border: 30 8% 35%;
+    --input: 30 8% 28%;
+    --ring: 102 35% 68%;
+    
+    --radius: 0.25rem;
+    
+    --neon-green: 102 35% 68%;
+    --neon-green-glow: 102 35% 78%;
+    --neon-cyan: 109 33% 55%;
+    --neon-amber: 25 83% 53%;
+    --terminal-bg: 30 8% 16%;
+    --terminal-border: 102 35% 68%;
+    --scanline: 102 35% 68%;
   }
 }
 

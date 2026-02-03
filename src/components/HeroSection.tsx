@@ -1,7 +1,14 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
-import { useState, useEffect } from "react";
 import { usePortfolio } from "@/lib/portfolioStore";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+
+// Get theme colors from CSS variables
+const getThemeColor = (varName: string) => {
+  if (typeof window === "undefined") return "142, 70%, 60%";
+  const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return value || "142, 70%, 60%";
+};
 
 // Scramble decode effect for text with glitch
 const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: number; className?: string }) => {
@@ -109,6 +116,25 @@ const TypewriterText = ({
 const HeroSection = () => {
   const { data } = usePortfolio();
   const { hero } = data;
+  const [primaryColor, setPrimaryColor] = useState("142, 70%, 60%");
+  const [primaryGlow, setPrimaryGlow] = useState("142, 70%, 60%");
+  const [primaryDark, setPrimaryDark] = useState("142, 70%, 45%");
+
+  useEffect(() => {
+    const updateColors = () => {
+      setPrimaryGlow(getThemeColor("--neon-green-glow"));
+      setPrimaryColor(getThemeColor("--neon-green"));
+      setPrimaryDark(getThemeColor("--primary"));
+    };
+
+    updateColors();
+    
+    const observer = new MutationObserver(updateColors);
+    observer.observe(document.documentElement, { attributes: true });
+    
+    return () => observer.disconnect();
+  }, []);
+
   const socialIcons = {
     github: Github,
     linkedin: Linkedin,
@@ -174,8 +200,8 @@ const HeroSection = () => {
                   }}
                   whileHover={{ 
                     scale: 1.2, 
-                    color: "hsl(142, 70%, 60%)",
-                    textShadow: "0 0 30px hsl(142, 70%, 60%)",
+                    color: `hsl(${primaryGlow})`,
+                    textShadow: `0 0 30px hsl(${primaryGlow})`,
                     transition: { duration: 0.2 }
                   }}
                 >
@@ -203,8 +229,8 @@ const HeroSection = () => {
                   }}
                   whileHover={{ 
                     scale: 1.2, 
-                    color: "hsl(142, 70%, 45%)",
-                    textShadow: "0 0 20px hsl(142, 70%, 45%)",
+                    color: `hsl(${primaryDark})`,
+                    textShadow: `0 0 20px hsl(${primaryDark})`,
                     transition: { duration: 0.2 }
                   }}
                 >

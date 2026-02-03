@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import ThemeSelector from "./ThemeSelector";
 
 const navItems = [
   { label: "About", href: "#about", number: "01" },
@@ -81,6 +82,10 @@ const Navbar = () => {
               >
                 Resume
               </motion.a>
+
+              <div className="hidden">
+                <ThemeSelector />
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -130,6 +135,9 @@ const Navbar = () => {
             >
               Resume
             </a>
+          <div className="hidden">
+              <ThemeSelector />
+            </div>
           </div>
         </div>
       </motion.div>
