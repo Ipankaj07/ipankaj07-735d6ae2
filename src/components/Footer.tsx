@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart, Phone, MapPin } from "lucide-react";
 import { usePortfolio } from "@/lib/portfolioStore";
+import { motion } from "framer-motion";
+import { Github, Heart, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import ThemeSelector from "./ThemeSelector";
 
 const Footer = () => {
   const { data } = usePortfolio();
@@ -17,7 +18,8 @@ const Footer = () => {
   return (
     <footer className="py-12 border-t border-border relative">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Main Row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
           {/* Social Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -63,14 +65,17 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Version */}
+          {/* Version and Theme */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xs text-muted-foreground"
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex items-center gap-2 text-xs text-muted-foreground"
           >
-            <span className="text-primary">{footer.version}</span> | {footer.year}
+            <span>
+              <span className="text-primary">{footer.version}</span> | {footer.year} ✨
+            </span>
+            <ThemeSelector />
           </motion.div>
         </div>
       </div>

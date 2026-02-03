@@ -1,6 +1,7 @@
-import { useMemo } from "react";
-import { usePortfolio } from "@/lib/portfolioStore";
+import ThemeSelector from "@/components/ThemeSelector";
 import { type IconKey } from "@/lib/portfolioConfig";
+import { usePortfolio } from "@/lib/portfolioStore";
+import { useMemo } from "react";
 
 const iconOptions: { value: IconKey; label: string }[] = [
   { value: "github", label: "GitHub" },
@@ -102,6 +103,7 @@ const Admin = () => {
             </a>
           </div>
         </header>
+        <ThemeSelector />
 
         <section className={sectionClassName}>
           <h2 className="text-xl font-semibold">Hero</h2>
