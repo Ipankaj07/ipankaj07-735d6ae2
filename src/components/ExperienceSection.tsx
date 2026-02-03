@@ -1,46 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Building2, Calendar, MapPin, Briefcase } from "lucide-react";
-
-const experiences = [
-  {
-    company: "ValuEnable Private Limited",
-    role: "Full Stack Developer",
-    period: "January 2023 - Present",
-    location: "Remote / India",
-    url: "https://valuenable.in/",
-    current: true,
-    responsibilities: [
-      "Architected and developed the Content Engine from scratch using React, Express, and MySQL, enabling policy retention and future-projection insights; now adopted by 2,000+ places including top Indian insurance companies such as Axis Max Life, ABSLI, Bajaj Allianz Life, and many more.",
-      "Led backend development for the AssureMe insurance application, collaborating closely with UI/UX teams and contributing cross-platform mobile features using Flutter.",
-      "Built and deployed a WhatsApp bot using AWS DynamoDB to manage user-specific messaging data and automate policy document generation.",
-      "Utilized and modified AWS services including S3, EC2, Lambda, CloudWatch, and SQS for cloud hosting, automation, and monitoring purposes across projects.",
-      "Refactored legacy codebases and implemented reusable components to improve performance, scalability, and maintainability across platforms.",
-      "Optimized large-scale data operations—supporting 200K+ report downloads—and significantly improved query efficiency for critical modules.",
-      "Mentored junior developers during onboarding and project ramp-up, while also proactively contributing solutions to team leads and seniors to accelerate feature implementation.",
-    ],
-  },
-  {
-    company: "OneCode",
-    role: "Software Development Intern",
-    period: "May - August 2022",
-    location: "Bangalore, India",
-    url: "https://www.onecode.in/",
-    current: false,
-    responsibilities: [
-      "Involved in all stages of software development lifecycle: development, debugging, and testing",
-      "Architected and implemented the front-end of OneCode Falcon feature — an embeddable web application that lets users log in and add complete details to use company offers and services",
-      "Contributed extensively to onecode-backend Project using Java framework SpringBoot",
-      "Developed RESTful web-services in Java using SpringBoot",
-      "Refactored ReactJS codebase to improve readability and maintainability",
-    ],
-  },
-];
+import { ExternalLink, Calendar, MapPin } from "lucide-react";
+import { usePortfolio } from "@/lib/portfolioStore";
 
 const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data } = usePortfolio();
+  const { experience } = data;
 
   return (
     <section id="experience" className="py-24 relative" ref={ref}>
@@ -53,12 +21,12 @@ const ExperienceSection = () => {
           className="section-header"
         >
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-primary">02.</span> Experience
+            <span className="text-primary">{experience.sectionLabel}</span> {experience.heading}
           </h2>
         </motion.div>
 
         <div className="space-y-10">
-          {experiences.map((exp, index) => (
+          {experience.items.map((exp, index) => (
             <motion.div
               key={exp.company}
               initial={{ opacity: 0, y: 30 }}
@@ -70,12 +38,10 @@ const ExperienceSection = () => {
                 <div className="terminal-dot bg-destructive" />
                 <div className="terminal-dot bg-neon-amber" />
                 <div className="terminal-dot bg-primary" />
-                <span className="ml-4 text-xs text-muted-foreground">
-                  work_history.log
-                </span>
+                <span className="ml-4 text-xs text-muted-foreground">{experience.terminalLabel}</span>
                 {exp.current && (
                   <span className="ml-auto text-xs text-primary border border-primary/50 px-2 py-0.5 rounded-sm bg-primary/10">
-                    CURRENT
+                    {experience.currentBadgeLabel}
                   </span>
                 )}
               </div>

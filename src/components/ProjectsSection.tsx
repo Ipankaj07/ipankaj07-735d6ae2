@@ -1,113 +1,24 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Github, ExternalLink, Folder, X } from "lucide-react";
+import { Github, ExternalLink, Folder } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-const projects = [
-  {
-    title: "Groww Clone",
-    description:
-      "A clone of Groww web application built with a team of 6 members over 5 days. Features include stock search, detailed stock information, graphs of stock prices, SIP amount setting, and OTP mail verification.",
-    tech: ["EJS", "CSS", "JavaScript", "MongoDB", "ExpressJS"],
-    github: "https://github.com/taherahmed14/Groww_Full-Stack_Project",
-    external: "https://groww-project.herokuapp.com/home",
-    image: "https://raw.githubusercontent.com/taherahmed14/Groww_Full-Stack_Project/master/screenshots/home.png",
-  },
-  {
-    title: "Nike Clone",
-    description:
-      "A front-end clone of Nike.com where users can browse and purchase dummy Nike products with dummy payment validation functionality.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/Ipankaj07/Nike-clone",
-    external: "https://ipankaj07.github.io/Nike-clone/",
-    image: "https://raw.githubusercontent.com/Ipankaj07/Nike-clone/main/screenshot.png",
-  },
-  {
-    title: "GitHub User Search",
-    description:
-      "Search any GitHub user by name, location, or company. View detailed profiles, repositories, and contribution stats with a clean interface.",
-    tech: ["React", "GitHub API", "CSS"],
-    github: "https://github.com/Ipankaj07/github-uzer",
-    external: null,
-    image: null,
-  },
-  {
-    title: "Imgur Giphy",
-    description:
-      "GIF search application powered by Giphy API. Search any GIF from the internet with an interface inspired by Imgur.",
-    tech: ["React", "Giphy API", "CSS"],
-    github: "https://github.com/Ipankaj07/imgur-giphy",
-    external: null,
-    image: null,
-  },
-  {
-    title: "YouTube Clone",
-    description:
-      "YouTube clone using Google Console API to fetch real YouTube data. Features homepage similar to YouTube with video search and playback functionality.",
-    tech: ["React", "YouTube API", "Google Console", "CSS"],
-    github: "https://github.com/Ipankaj07/Youtube",
-    external: null,
-    image: null,
-  },
-  {
-    title: "Weather App",
-    description:
-      "Weather application with 7-day forecast. Search for multiple locations and view detailed weather information including temperature, humidity, and conditions.",
-    tech: ["React", "Weather API", "CSS"],
-    github: "https://github.com/Ipankaj07/weather-app",
-    external: null,
-    image: null,
-  },
-  {
-    title: "File Uploader",
-    description:
-      "Upload files and get live URLs to access them anywhere. Supports files up to 100MB with instant shareable links.",
-    tech: ["React", "Node.js", "Cloud Storage"],
-    github: "https://github.com/Ipankaj07/file-uploader",
-    external: null,
-    image: null,
-  },
-  {
-    title: "Postman Clone",
-    description:
-      "A Postman clone that replicates core Postman features. Test APIs, send requests, and view responses with a familiar interface.",
-    tech: ["React", "Axios", "JavaScript"],
-    github: "https://github.com/Ipankaj07/postman-clone",
-    external: null,
-    image: null,
-  },
-  {
-    title: "The Platinum Portfolio",
-    description:
-      "Creative portfolio website for the character 'The Professor' from Money Heist (Netflix). A unique themed portfolio concept.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/Ipankaj07/the-platinum",
-    external: null,
-    image: null,
-  },
-  {
-    title: "Apartment Flats Manager",
-    description:
-      "View available apartments and hotels at searched locations. Browse details, check availability, and book accommodations.",
-    tech: ["React", "Node.js", "MongoDB"],
-    github: "https://github.com/Ipankaj07/Apartment-Flats-Manager",
-    external: null,
-    image: null,
-  },
-];
+import { usePortfolio } from "@/lib/portfolioStore";
+import type { PortfolioData } from "@/lib/portfolioConfig";
 
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [skeletonMode, setSkeletonMode] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<PortfolioData["projects"]["items"][number] | null>(null);
   const [imageError, setImageError] = useState<Record<string, boolean>>({});
+  const { data } = usePortfolio();
+  const { projects } = data;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -143,16 +54,31 @@ const ProjectsSection = () => {
           className="section-header"
         >
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-primary">03.</span> Projects
+            <span className="text-primary">{projects.sectionLabel}</span> {projects.heading}
           </h2>
           <p className="hidden md:block text-sm text-muted-foreground mt-2">
-            Press <kbd className="px-2 py-1 bg-primary/20 border border-primary/30 rounded text-primary text-xs">Space</kbd> for skeleton view
+            {projects.hint.split(" ").map((word, index) =>
+              word.toLowerCase() === "space" ? (
+                <kbd
+                  key={`${word}-${index}`}
+                  className={`px-2 py-1 bg-primary/20 border border-primary/30 rounded text-primary text-xs${
+                    index === 0 ? "" : " ml-1"
+                  }`}
+                >
+                  {word}
+                </kbd>
+              ) : (
+                <span key={`${word}-${index}`} className={index === 0 ? "" : "ml-1"}>
+                  {word}
+                </span>
+              )
+            )}
           </p>
         </motion.div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {projects.items.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
@@ -197,7 +123,7 @@ const ProjectsSection = () => {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       className="text-muted-foreground hover:text-primary transition-colors"
-                      aria-label="View source code"
+                      aria-label={projects.viewSourceAriaLabel}
                     >
                       <Github size={18} />
                     </a>
@@ -209,7 +135,7 @@ const ProjectsSection = () => {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       className="text-muted-foreground hover:text-primary transition-colors"
-                      aria-label="View live project"
+                      aria-label={projects.viewLiveAriaLabel}
                     >
                       <ExternalLink size={18} />
                     </a>
@@ -253,13 +179,13 @@ const ProjectsSection = () => {
           className="text-center mt-16"
         >
           <a
-            href="https://github.com/Ipankaj07"
+            href={projects.viewMore.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-sm hover:bg-primary/10 transition-all duration-300 box-glow-hover"
           >
             <Github size={18} />
-            View All on GitHub
+            {projects.viewMore.label}
           </a>
         </motion.div>
 
@@ -291,7 +217,7 @@ const ProjectsSection = () => {
               </p>
               
               <div>
-                <h4 className="text-sm text-primary mb-2 font-mono">TECHNOLOGIES:</h4>
+                <h4 className="text-sm text-primary mb-2 font-mono">{projects.modalTechLabel}</h4>
                 <ul className="flex flex-wrap gap-2">
                   {selectedProject?.tech.map((tech) => (
                     <li
@@ -313,7 +239,7 @@ const ProjectsSection = () => {
                     className="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-sm hover:bg-primary/10 transition-colors"
                   >
                     <Github size={16} />
-                    View Code
+                    {projects.viewCodeLabel}
                   </a>
                 )}
                 {selectedProject?.external && (
@@ -324,7 +250,7 @@ const ProjectsSection = () => {
                     className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                   >
                     <ExternalLink size={16} />
-                    Live Demo
+                    {projects.liveDemoLabel}
                   </a>
                 )}
               </div>

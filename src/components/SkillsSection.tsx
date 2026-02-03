@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { usePortfolio } from "@/lib/portfolioStore";
 
 // SVG icons with theme-compatible colors (monochrome for neon styling)
 const skillIcons: Record<string, React.ReactNode> = {
@@ -101,24 +102,19 @@ const skillIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-const skillCategories = [
-  {
-    title: "FRONTEND",
-    skills: ["React", "JavaScript", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Flutter"],
-  },
-  {
-    title: "BACKEND",
-    skills: ["Node.js", "Express.js", "MongoDB", "MySQL", "Java", "SpringBoot"],
-  },
-  {
-    title: "TOOLS & CLOUD",
-    skills: ["Git", "GitHub", "AWS", "Docker", "VS Code", "Postman"],
-  },
-];
-
 const SkillsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data } = usePortfolio();
+  const { skills } = data;
+  const renderSkillIcon = (skill: string) => {
+    if (skillIcons[skill]) return skillIcons[skill];
+    return (
+      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 text-xs text-primary">
+        {skill.slice(0, 2).toUpperCase()}
+      </span>
+    );
+  };
 
   return (
     <section id="skills" className="py-24 relative" ref={ref}>
@@ -131,12 +127,12 @@ const SkillsSection = () => {
           className="section-header"
         >
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-primary">04.</span> Skills
+            <span className="text-primary">{skills.sectionLabel}</span> {skills.heading}
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, catIndex) => (
+          {skills.categories.map((category, catIndex) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 30 }}
@@ -173,7 +169,7 @@ const SkillsSection = () => {
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        {skillIcons[skill]}
+                        {renderSkillIcon(skill)}
                       </motion.div>
                       {/* Glow ring on hover */}
                       <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-primary/40 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)] transition-all duration-300" />
@@ -201,20 +197,7 @@ const SkillsSection = () => {
         <div className="flex animate-marquee whitespace-nowrap" style={{ width: 'max-content' }}>
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex shrink-0 items-center">
-              {[
-                "REACT",
-                "JAVASCRIPT",
-                "TYPESCRIPT",
-                "NODE.JS",
-                "MONGODB",
-                "EXPRESS",
-                "GIT",
-                "TAILWIND",
-                "JAVA",
-                "SPRINGBOOT",
-                "AWS",
-                "FLUTTER",
-              ].map((tech, index) => (
+              {skills.marquee.map((tech, index) => (
                 <span
                   key={`${i}-${index}`}
                   className="mx-12 text-3xl md:text-4xl font-bold text-muted-foreground/20 hover:text-primary/50 transition-colors duration-300 tracking-widest"
