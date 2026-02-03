@@ -128,7 +128,7 @@ const HeroSection = () => {
     updateColors();
     
     const observer = new MutationObserver(updateColors);
-    observer.observe(document.documentElement, { attributes: true });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     
     return () => observer.disconnect();
   }, []);
