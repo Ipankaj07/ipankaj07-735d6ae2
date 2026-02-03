@@ -15,11 +15,11 @@ const themeOptions = [
 const storageKey = "theme";
 
 const ThemeSelector = () => {
-  const [theme, setTheme] = useState("cyber");
+  const [theme, setTheme] = useState("monokai");
 
   useEffect(() => {
     const storedTheme = localStorage.getItem(storageKey);
-    const initialTheme = storedTheme ?? document.documentElement.dataset.theme ?? "cyber";
+    const initialTheme = storedTheme ?? document.documentElement.dataset.theme ?? "monokai";
     setTheme(initialTheme);
     document.documentElement.dataset.theme = initialTheme;
   }, []);
