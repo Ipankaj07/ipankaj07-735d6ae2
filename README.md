@@ -1,73 +1,135 @@
-# Welcome to your Lovable project
+# Portfolio
 
-## Project info
+A modern, interactive portfolio website built with cutting-edge web technologies. Featuring theme customization, terminal aesthetics, and smooth animations.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🎨 Features
 
-## How can I edit this code?
+- **9 Stunning Themes**: Cyber, Dracula, Nord, Monokai, Solarized Dark, Gruvbox, Soft Black, Light, and Blue themes
+- **Theme Persistence**: Your selected theme is saved in localStorage
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Smooth Animations**: Framer Motion for fluid, interactive animations
+- **Terminal UI**: Retro terminal-inspired design elements
+- **Real-time Theme Updates**: Dynamic color switching across all components
+- **Accessible Components**: Built with shadcn-ui for consistent UX
 
-There are several ways of editing your application.
+## 🛠️ Technologies
 
-**Use Lovable**
+- **Frontend Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn-ui
+- **Animations**: Framer Motion
+- **Icons**: React Icons + Lucide React
+- **State Management**: Custom Portfolio Store
+- **Routing**: React Router
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
+- Node.js (v18+) with npm
+- Git
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Step 1: Clone the repository
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Step 2: Navigate to the project directory
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:<PORT>`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📦 Build for Production
 
-**Use GitHub Codespaces**
+```sh
+# Build the project
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview the production build
+npm run preview
+```
 
-## What technologies are used for this project?
+## 🎯 Project Structure
 
-This project is built with:
+```
+src/
+├── components/          # React components
+│   ├── ui/             # shadcn-ui components
+│   ├── ThemeSelector.tsx
+│   ├── HeroSection.tsx
+│   ├── SkillsSection.tsx
+│   └── ...other sections
+├── pages/              # Page components
+│   ├── Index.tsx       # Main portfolio page
+│   ├── Admin.tsx       # Admin panel
+│   └── NotFound.tsx
+├── lib/                # Utilities and store
+│   ├── portfolioStore.tsx
+│   └── portfolioConfig.ts
+├── App.tsx             # Main app component
+└── index.css           # Global styles & themes
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🎨 Available Themes
 
-## How can I deploy this project?
+1. **Cyber** - Green neon cyberpunk aesthetic
+2. **Dracula** - Classic dark purple theme
+3. **Nord** - Arctic cool palette
+4. **Monokai** - Famous VSCode theme
+5. **Solarized Dark** - High contrast warm theme
+6. **Gruvbox** - Retro warm colors
+7. **Soft Black** - Minimalist dark theme
+8. **Light** - Clean light theme
+9. **Blue** - Cool blue palette
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🔧 Configuration
 
-## Can I connect a custom domain to my Lovable project?
+Edit `src/lib/portfolioConfig.ts` to customize:
+- Personal information
+- Social links
+- Skills and experience
+- Projects
+- Education
+- Contact information
 
-Yes, you can!
+## 📱 Responsive Breakpoints
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Mobile: < 768px
+- Tablet: 768px - 1024px
+- Desktop: > 1024px
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+```sh
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+### Deploy to Netlify
+
+Connect your GitHub repository to Netlify for automatic deployments on every push.
+
+### Deploy to GitHub Pages
+
+```sh
+npm run build
+# Push dist folder to gh-pages branch
+```
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+---
+
+Built with ❤️ by Pankaj Raj | v1.0.0
