@@ -2,37 +2,17 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, Calendar, MapPin, Award } from "lucide-react";
-
-const education = [
-  {
-    institution: "Maharshi Dayanand University",
-    degree: "B.Tech in Computer Science Engineering",
-    period: "2020 - 2024",
-    location: "Rohtak, India",
-    grade: null,
-    icon: GraduationCap,
-  },
-  {
-    institution: "Masai School",
-    degree: "Full-Stack Web Development (Full-time)",
-    period: "April 2021 - April 2022",
-    location: "Bangalore, India",
-    grade: "Grade: A",
-    icon: Award,
-  },
-  {
-    institution: "Snatak College",
-    degree: "Higher Secondary Education",
-    period: "May 2018 - March 2020",
-    location: "Islampur, India",
-    grade: "Percentage: 70.6%",
-    icon: GraduationCap,
-  },
-];
+import { usePortfolio } from "@/lib/portfolioStore";
 
 const EducationSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data } = usePortfolio();
+  const { education } = data;
+  const iconMap = {
+    graduation: GraduationCap,
+    award: Award,
+  };
 
   return (
     <section id="education" className="py-24 relative" ref={ref}>
@@ -45,13 +25,13 @@ const EducationSection = () => {
           className="section-header"
         >
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-primary">05.</span> Education
+            <span className="text-primary">{education.sectionLabel}</span> {education.heading}
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {education.map((edu, index) => {
-            const IconComponent = edu.icon;
+          {education.items.map((edu, index) => {
+            const IconComponent = iconMap[edu.icon as keyof typeof iconMap] ?? GraduationCap;
             return (
               <motion.div
                 key={edu.institution}
@@ -62,11 +42,11 @@ const EducationSection = () => {
               >
                 <div className="terminal-header">
                   <div className="terminal-dot bg-destructive" />
-                  <div className="terminal-dot bg-neon-amber" />
-                  <div className="terminal-dot bg-primary" />
-                  <span className="ml-4 text-xs text-muted-foreground">
-                    education.log
-                  </span>
+                <div className="terminal-dot bg-neon-amber" />
+                <div className="terminal-dot bg-primary" />
+                <span className="ml-4 text-xs text-muted-foreground">
+                  {education.terminalLabel}
+                </span>
                 </div>
 
                 <div className="p-6">

@@ -2,17 +2,19 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code, Music, Plane, MapPin, Gamepad2 } from "lucide-react";
-
-const interests = [
-  { icon: Code, label: "Explore Tech" },
-  { icon: Music, label: "Music" },
-  { icon: Plane, label: "Travelling" },
-  { icon: Gamepad2, label: "Gaming" },
-];
+import { usePortfolio } from "@/lib/portfolioStore";
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data } = usePortfolio();
+  const { about } = data;
+  const interestIcons = {
+    code: Code,
+    music: Music,
+    plane: Plane,
+    gamepad: Gamepad2,
+  };
 
   return (
     <section id="about" className="py-24 relative" ref={ref}>
@@ -25,7 +27,7 @@ const AboutSection = () => {
           className="section-header"
         >
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-primary">01.</span> About Me
+            <span className="text-primary">{about.sectionLabel}</span> {about.heading}
           </h2>
         </motion.div>
 
@@ -38,13 +40,13 @@ const AboutSection = () => {
             className="space-y-6"
           >
             <div className="terminal-window">
-              <div className="terminal-header">
-                <div className="terminal-dot bg-destructive" />
-                <div className="terminal-dot bg-neon-amber" />
-                <div className="terminal-dot bg-primary" />
-                <span className="ml-4 text-xs text-muted-foreground">bio.md</span>
-              </div>
-              <div className="p-6 flex flex-col sm:flex-row gap-6">
+                <div className="terminal-header">
+                  <div className="terminal-dot bg-destructive" />
+                  <div className="terminal-dot bg-neon-amber" />
+                  <div className="terminal-dot bg-primary" />
+                  <span className="ml-4 text-xs text-muted-foreground">{about.terminalLabel}</span>
+                </div>
+                <div className="p-6 flex flex-col sm:flex-row gap-6">
                 {/* Agent Style Photo - visible on all screens */}
                 <div className="flex-shrink-0 self-center sm:self-start">
                   <div className="relative w-24 h-28">
@@ -55,43 +57,30 @@ const AboutSection = () => {
                     <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary" />
                     {/* Photo */}
                     <img
-                      src="https://pankaj-raj.vercel.app/static/1a54191bfe81380550be08e0025794ca/25f3c/2p88zt9c.jpg"
-                      alt="Agent Pankaj"
+                      src={about.image.src}
+                      alt={about.image.alt}
                       className="w-full h-full object-cover grayscale"
                     />
                     {/* Overlay scanline */}
                     <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/10" />
                     {/* ID text */}
                     <div className="absolute -bottom-4 left-0 right-0 text-center">
-                      <span className="text-[8px] text-primary font-mono tracking-widest">ID: AGENT-07</span>
+                      <span className="text-[8px] text-primary font-mono tracking-widest">
+                        {about.image.idLabel}
+                      </span>
                     </div>
                   </div>
                 </div>
                 
                 {/* Bio content */}
                 <div className="space-y-4 text-muted-foreground flex-1 mt-4 sm:mt-0">
-                  <p className="leading-relaxed typewriter-text">
-                    Hello! I'm <span className="text-primary font-semibold">Pankaj</span>, 
-                    a Full-Stack Developer with <span className="text-primary">2+ years</span> of 
-                    experience building scalable web applications and cross-platform solutions.
-                  </p>
-                  <p className="leading-relaxed">
-                    Currently at <span className="text-primary">ValuEnable</span>, I architected 
-                    the <span className="text-primary">Content Engine</span> from scratch — a 
-                    policy retention platform now used by <span className="text-primary">2,000+ places</span> including 
-                    top Indian insurers like Axis Max Life, ABSLI, and Bajaj Allianz Life.
-                  </p>
-                  <p className="leading-relaxed">
-                    I specialize in <span className="text-primary">React</span>, 
-                    <span className="text-primary"> Node.js</span>, 
-                    <span className="text-primary"> AWS</span> (S3, EC2, Lambda, DynamoDB), and 
-                    <span className="text-primary"> Flutter</span>. I've built WhatsApp bots, 
-                    optimized 200K+ report downloads, and mentored junior developers.
-                  </p>
-                  <p className="leading-relaxed">
-                    Graduate of <span className="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) 
-                    and <span className="text-primary">Maharshi Dayanand University</span> (B.Tech CSE, 2024).
-                  </p>
+                  {about.bioParagraphs.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className={`leading-relaxed ${index === 0 ? "typewriter-text" : ""}`}
+                      dangerouslySetInnerHTML={{ __html: paragraph }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -104,7 +93,7 @@ const AboutSection = () => {
               className="flex items-center gap-2 text-muted-foreground"
             >
               <MapPin size={16} className="text-primary" />
-              <span>India (Remote)</span>
+              <span>{about.location}</span>
             </motion.div>
 
             {/* Interests */}
@@ -113,17 +102,21 @@ const AboutSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <h3 className="text-sm text-primary mb-4 tracking-wider">INTERESTED_IN:</h3>
+              <h3 className="text-sm text-primary mb-4 tracking-wider">{about.interestsLabel}</h3>
               <div className="flex flex-wrap gap-3">
-                {interests.map((interest) => (
-                  <div
-                    key={interest.label}
-                    className="flex items-center gap-2 px-4 py-2 border border-border rounded-sm bg-secondary/30 hover:border-primary/50 transition-colors duration-300"
-                  >
-                    <interest.icon size={16} className="text-primary" />
-                    <span className="text-sm text-foreground">{interest.label}</span>
-                  </div>
-                ))}
+                {about.interests.map((interest) => {
+                  const Icon = interestIcons[interest.icon as keyof typeof interestIcons];
+                  if (!Icon) return null;
+                  return (
+                    <div
+                      key={interest.label}
+                      className="flex items-center gap-2 px-4 py-2 border border-border rounded-sm bg-secondary/30 hover:border-primary/50 transition-colors duration-300"
+                    >
+                      <Icon size={16} className="text-primary" />
+                      <span className="text-sm text-foreground">{interest.label}</span>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           </motion.div>

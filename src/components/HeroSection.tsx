@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
+import { usePortfolio } from "@/lib/portfolioStore";
 
 // Scramble decode effect for text with glitch
 const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: number; className?: string }) => {
@@ -56,7 +57,15 @@ const ScrambleText = ({ text, delay, className = "" }: { text: string; delay: nu
   );
 };
 
-const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
+const TypewriterText = ({
+  text,
+  delay,
+  highlightKeywords,
+}: {
+  text: string;
+  delay: number;
+  highlightKeywords: string[];
+}) => {
   const [displayText, setDisplayText] = useState("");
   const [started, setStarted] = useState(false);
   
@@ -78,11 +87,12 @@ const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
     return () => clearInterval(interval);
   }, [started, text]);
 
-  const highlightKeywords = (str: string) => {
-    const keywords = ["React", "Node.js", "AWS", "Flutter", "ValuEnable", "2,000+", "Axis Max Life", "Bajaj Allianz"];
+  const applyHighlights = (str: string) => {
     let result = str;
-    keywords.forEach(keyword => {
-      result = result.replace(new RegExp(keyword, 'g'), `<span class="text-primary">${keyword}</span>`);
+    highlightKeywords.forEach((keyword) => {
+      if (!keyword) return;
+      const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      result = result.replace(new RegExp(escaped, "g"), `<span class=\"text-primary\">${keyword}</span>`);
     });
     return result;
   };
@@ -90,15 +100,22 @@ const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
   return (
     <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
       <span className="text-primary">$ </span>
-      <span dangerouslySetInnerHTML={{ __html: highlightKeywords(displayText) }} />
+      <span dangerouslySetInnerHTML={{ __html: applyHighlights(displayText) }} />
       {displayText.length < text.length && <span className="animate-pulse text-primary">▊</span>}
     </p>
   );
 };
 
 const HeroSection = () => {
-  const firstName = "Pankaj";
-  const lastName = "Raj";
+  const { data } = usePortfolio();
+  const { hero } = data;
+  const socialIcons = {
+    github: Github,
+    linkedin: Linkedin,
+    mail: Mail,
+    phone: Phone,
+    map: MapPin,
+  };
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
@@ -120,7 +137,7 @@ const HeroSection = () => {
             className="mb-6"
           >
             <span className="status-online text-sm text-primary">
-              <ScrambleText text="STATUS: OPEN TO OPPORTUNITIES" delay={2.6} />
+              <ScrambleText text={hero.statusText} delay={2.6} />
             </span>
           </motion.div>
 
@@ -132,7 +149,7 @@ const HeroSection = () => {
             className="mb-4"
           >
             <span className="text-muted-foreground text-lg font-display">
-              <ScrambleText text="Hello, I'm" delay={2.7} />
+              <ScrambleText text={hero.greeting} delay={2.7} />
             </span>
           </motion.div>
 
@@ -144,7 +161,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ delay: 2.8, duration: 0.8, ease: "easeOut" }}
             >
-              {firstName.split("").map((letter, index) => (
+              {hero.firstName.split("").map((letter, index) => (
                 <motion.span
                   key={index}
                   className="inline-block"
@@ -173,7 +190,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3.4, duration: 0.6 }}
             >
-              {lastName.split("").map((letter, index) => (
+              {hero.lastName.split("").map((letter, index) => (
                 <motion.span
                   key={index}
                   className="inline-block"
@@ -203,7 +220,10 @@ const HeroSection = () => {
             transition={{ delay: 3.8, duration: 0.6 }}
             className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-display mb-8"
           >
-            <ScrambleText text="Full-Stack" delay={3.8} /> <span className="text-primary"><ScrambleText text="Developer" delay={3.9} /></span>
+            <ScrambleText text={hero.rolePrefix} delay={3.8} />{" "}
+            <span className="text-primary">
+              <ScrambleText text={hero.roleEmphasis} delay={3.9} />
+            </span>
           </motion.h2>
 
           {/* Description */}
@@ -217,12 +237,13 @@ const HeroSection = () => {
               <div className="terminal-dot bg-destructive" />
               <div className="terminal-dot bg-neon-amber" />
               <div className="terminal-dot bg-primary" />
-              <span className="ml-4 text-xs text-muted-foreground">about.sh</span>
+              <span className="ml-4 text-xs text-muted-foreground">{hero.terminalLabel}</span>
             </div>
             <div className="p-4">
               <TypewriterText 
-                text="2+ years of experience building scalable web applications with React, Node.js, AWS, and Flutter. Currently at ValuEnable, architecting insurance solutions used by 2,000+ companies including Axis Max Life & Bajaj Allianz."
+                text={hero.description}
                 delay={4.0}
+                highlightKeywords={hero.highlightKeywords}
               />
             </div>
           </motion.div>
@@ -235,16 +256,16 @@ const HeroSection = () => {
             className="flex gap-3 md:gap-4 mb-12"
           >
             <a
-              href="#contact"
+              href={hero.ctaLinks[0]?.href ?? "#contact"}
               className="flex-1 md:flex-none px-4 md:px-8 py-3 bg-primary text-primary-foreground font-medium rounded-sm hover:bg-primary/90 transition-all duration-300 box-glow hover:scale-105 text-center text-sm md:text-base whitespace-nowrap"
             >
-              Get In Touch
+              {hero.ctaLinks[0]?.label ?? "Get In Touch"}
             </a>
             <a
-              href="#projects"
+              href={hero.ctaLinks[1]?.href ?? "#projects"}
               className="flex-1 md:flex-none px-4 md:px-8 py-3 border border-primary text-primary font-medium rounded-sm hover:bg-primary/10 transition-all duration-300 box-glow-hover text-center text-sm md:text-base whitespace-nowrap"
             >
-              View Projects
+              {hero.ctaLinks[1]?.label ?? "View Projects"}
             </a>
           </motion.div>
 
@@ -255,41 +276,24 @@ const HeroSection = () => {
             transition={{ delay: 4.1, duration: 0.6 }}
             className="flex items-center gap-6"
           >
-            <a
-              href="https://github.com/Ipankaj07"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110"
-              aria-label="GitHub"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ipankaj07/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="mailto:praj4936@gmail.com"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110"
-              aria-label="Email"
-            >
-              <Mail size={24} />
-            </a>
-            <a
-              href="tel:+917644061508"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110"
-              aria-label="Phone"
-            >
-              <Phone size={24} />
-            </a>
+            {hero.socialLinks.map((link) => {
+              const Icon = socialIcons[link.icon as keyof typeof socialIcons];
+              if (!Icon) return null;
+              return (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target={link.url.startsWith("http") ? "_blank" : undefined}
+                  rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110"
+                  aria-label={link.label}
+                >
+                  <Icon size={24} />
+                </a>
+              );
+            })}
           </motion.div>
         </div>
-
       </div>
     </section>
   );
