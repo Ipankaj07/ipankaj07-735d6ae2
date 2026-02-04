@@ -187,7 +187,7 @@ export const defaultPortfolioData: PortfolioData = {
       'Hello! I\'m <span class="text-primary font-semibold">Pankaj</span>, a Full-Stack Developer with <span class="text-primary">2+ years</span> of experience building scalable web applications and cross-platform solutions.',
       'Currently at <span class="text-primary">ValuEnable</span>, I architected the <span class="text-primary">Content Engine</span> from scratch — a policy retention platform now used by <span class="text-primary">2,000+ places</span> including top Indian insurers like Axis Max Life, ABSLI, and Bajaj Allianz Life.',
       'I specialize in <span class="text-primary">React</span>, <span class="text-primary">Node.js</span>, <span class="text-primary">AWS</span> (S3, EC2, Lambda, DynamoDB), and <span class="text-primary">Flutter</span>. I\'ve built WhatsApp bots, optimized 200K+ report downloads, and mentored junior developers.',
-      'Graduate of <span class="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) and <span class="text-primary">Maharshi Dayanand University</span> (B.Tech CSE, 2024).',
+      'Graduate of <span class="text-primary">Masai School</span> (Full-Stack Web Dev, Grade A) and <span class="text-primary">Maharshi Dayanand University</span> (B.Tech CSE).',
     ],
     location: 'India (Remote)',
     interests: [
@@ -412,7 +412,7 @@ export const defaultPortfolioData: PortfolioData = {
       {
         institution: 'Maharshi Dayanand University',
         degree: 'B.Tech in Computer Science Engineering',
-        period: '2020 - 2024',
+        period: '2024 - Present',
         location: 'Rohtak, India',
         grade: null,
         icon: 'graduation',
@@ -429,7 +429,7 @@ export const defaultPortfolioData: PortfolioData = {
         institution: 'Snatak College',
         degree: 'Higher Secondary Education',
         period: 'May 2018 - March 2020',
-        location: 'Islampur, India',
+        location: 'Nalanda, India',
         grade: 'Percentage: 70.6%',
         icon: 'graduation',
       },
@@ -440,7 +440,7 @@ export const defaultPortfolioData: PortfolioData = {
     heading: 'Contact',
     introTitle: 'Get In Touch',
     introDescription:
-      "Although I'm not currently looking for any new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+      'Although I’m currently open to new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!',
     terminalLabel: 'pankaj_contact — zsh',
     terminalIntroLines: [
       'Pankaj Contact Interface initialized...',
