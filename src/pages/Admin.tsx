@@ -136,65 +136,15 @@ const Admin = () => {
                 onChange={(event) => updateBlog({ tagline: event.target.value })}
               />
             </label>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold">Chapters</h3>
-              <button
-                type="button"
-                onClick={() =>
-                  updateBlog({
-                    chapters: [
-                      ...data.blog.chapters,
-                      { title: "New Chapter", content: "## New Section\\n\\nAdd details here." },
-                    ],
-                  })
-                }
-                className="text-xs text-primary"
-              >
-                + Add chapter
-              </button>
-            </div>
-            {data.blog.chapters.map((chapter, index) => (
-              <div key={`${chapter.title}-${index}`} className="space-y-3 rounded-md border border-border/60 p-4">
-                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                  <label className="space-y-2 md:flex-1">
-                    <span className="text-sm text-muted-foreground">Chapter title</span>
-                    <input
-                      className={inputClassName}
-                      value={chapter.title}
-                      onChange={(event) => {
-                        const next = [...data.blog.chapters];
-                        next[index] = { ...chapter, title: event.target.value };
-                        updateBlog({ chapters: next });
-                      }}
-                    />
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      updateBlog({ chapters: data.blog.chapters.filter((_, idx) => idx !== index) })
-                    }
-                    className="text-xs text-destructive"
-                  >
-                    Remove chapter
-                  </button>
-                </div>
-                <label className="space-y-2">
-                  <span className="text-sm text-muted-foreground">Markdown content</span>
-                  <textarea
-                    className={textareaClassName}
-                    rows={14}
-                    value={chapter.content}
-                    onChange={(event) => {
-                      const next = [...data.blog.chapters];
-                      next[index] = { ...chapter, content: event.target.value };
-                      updateBlog({ chapters: next });
-                    }}
-                  />
-                </label>
-              </div>
-            ))}
+            <label className="space-y-2 md:col-span-2">
+              <span className="text-sm text-muted-foreground">Markdown content</span>
+              <textarea
+                className={textareaClassName}
+                rows={16}
+                value={data.blog.content}
+                onChange={(event) => updateBlog({ content: event.target.value })}
+              />
+            </label>
           </div>
         </section>
 

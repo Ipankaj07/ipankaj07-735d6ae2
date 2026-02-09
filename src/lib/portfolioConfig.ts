@@ -121,7 +121,7 @@ export type PortfolioData = {
     title: string;
     subtitle: string;
     tagline: string;
-    chapters: { title: string; content: string }[];
+    content: string;
   };
 };
 
@@ -552,10 +552,39 @@ export const defaultPortfolioData: PortfolioData = {
     subtitle: 'From Zero to Interview Success - Explained by a 10-Year Veteran',
     tagline:
       'What makes this different: real production stories, actual code that scaled, and interview answers that got offers.',
-    chapters: [
-      {
-        title: 'Part 1: Networking & Communication',
-        content: `## Chapter 1: How Web Really Works
+    content: `# Frontend System Design: Complete Industry Guide
+## From Zero to Interview Success
+
+> **What makes this different**: Real production stories, actual code that scaled, interview answers that got offers
+
+---
+
+## 📖 Quick Navigation
+
+**Part 1: Foundation**
+1. Networking & Communication
+2. Security
+3. Performance
+
+**Part 2: Engineering**
+4. Testing
+5. Database & Caching
+6. Design Patterns
+
+**Part 3: Production**
+7. PWAs & Offline
+8. Accessibility
+9. Monitoring
+
+**Part 4: System Design**
+10. Low-Level Design
+11. High-Level Design
+
+---
+
+# PART 1: NETWORKING & COMMUNICATION
+
+## Chapter 1: How Web Really Works
 
 ### 1.1 The URL Journey - What Actually Happens
 
@@ -1402,11 +1431,12 @@ Real-world architecture:
 
 Cost: ~$5,000/month for 1M concurrent users
 \`\`\`
-`,
-      },
-      {
-        title: 'Part 2: Security at Scale',
-        content: `## Chapter 2: Security - Lessons from Production Breaches
+
+---
+
+# PART 2: SECURITY AT SCALE
+
+## Chapter 2: Security - Lessons from Production Breaches
 
 ### 2.1 XSS (Cross-Site Scripting) - The $2M Mistake
 
@@ -2077,11 +2107,12 @@ async function detectSuspicious(userId, activity) {
     - Email verification for sensitive actions
     - SMS/email notifications for logins
 \`\`\`
-`,
-      },
-      {
-        title: 'Part 3: Performance Optimization',
-        content: `## Chapter 3: Performance - The 1-Second Rule
+
+---
+
+# PART 3: PERFORMANCE OPTIMIZATION
+
+## Chapter 3: Performance - The 1-Second Rule
 
 ### Real Story: From 8s to 1.2s Load Time
 
@@ -2893,7 +2924,5 @@ This guide continues with:
 - High-Level System Design
 
 Each with the same depth of real-world examples, production code, and interview preparation!`,
-      },
-    ],
   },
 };

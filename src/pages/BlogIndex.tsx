@@ -9,71 +9,10 @@ const slugify = (value: string) =>
     .replace(/[\s-]+/g, "-");
 
 const CodeBlock = ({ children }: { children: string }) => (
-  <pre className="mt-4 overflow-x-auto rounded-lg border border-border bg-card/70 p-4 text-sm text-emerald-100">
-    <code className="font-mono leading-6">{children}</code>
+  <pre className="mt-4 overflow-x-auto rounded-lg border border-border bg-card/70 p-4 text-sm text-foreground">
+    <code>{children}</code>
   </pre>
 );
-
-const parseInline = (text: string) => {
-  const nodes: Array<string | JSX.Element> = [];
-  let buffer = "";
-  let index = 0;
-  const pushBuffer = () => {
-    if (buffer) {
-      nodes.push(buffer);
-      buffer = "";
-    }
-  };
-
-  while (index < text.length) {
-    const rest = text.slice(index);
-    const boldMatch = rest.match(/^\*\*(.+?)\*\*/);
-    const codeMatch = rest.match(/^`([^`]+)`/);
-    const italicMatch = rest.match(/^\*(.+?)\*/);
-
-    if (boldMatch) {
-      pushBuffer();
-      nodes.push(
-        <strong key={`bold-${nodes.length}`} className="font-semibold text-foreground">
-          {boldMatch[1]}
-        </strong>
-      );
-      index += boldMatch[0].length;
-      continue;
-    }
-
-    if (codeMatch) {
-      pushBuffer();
-      nodes.push(
-        <code
-          key={`code-${nodes.length}`}
-          className="rounded bg-background/60 px-1 py-0.5 font-mono text-[0.85em] text-emerald-200"
-        >
-          {codeMatch[1]}
-        </code>
-      );
-      index += codeMatch[0].length;
-      continue;
-    }
-
-    if (italicMatch) {
-      pushBuffer();
-      nodes.push(
-        <em key={`italic-${nodes.length}`} className="italic text-foreground/80">
-          {italicMatch[1]}
-        </em>
-      );
-      index += italicMatch[0].length;
-      continue;
-    }
-
-    buffer += text[index];
-    index += 1;
-  }
-
-  pushBuffer();
-  return nodes;
-};
 
 const renderMarkdown = (content: string) => {
   const lines = content.split("\n");
@@ -93,7 +32,7 @@ const renderMarkdown = (content: string) => {
     if (text) {
       blocks.push(
         <p key={`p-${blocks.length}`} className="text-sm leading-7 text-muted-foreground">
-          {parseInline(text)}
+          {text}
         </p>
       );
     }
@@ -106,7 +45,7 @@ const renderMarkdown = (content: string) => {
         <ul key={`ul-${blocks.length}`} className="space-y-1 pl-6 text-sm text-muted-foreground">
           {listBuffer.map((item, index) => (
             <li key={`${item}-${index}`} className="list-disc">
-              {parseInline(item)}
+              {item}
             </li>
           ))}
         </ul>
@@ -118,7 +57,7 @@ const renderMarkdown = (content: string) => {
         <ol key={`ol-${blocks.length}`} className="space-y-1 pl-6 text-sm text-muted-foreground">
           {orderedBuffer.map((item, index) => (
             <li key={`${item}-${index}`} className="list-decimal">
-              {parseInline(item)}
+              {item}
             </li>
           ))}
         </ol>
@@ -146,7 +85,7 @@ const renderMarkdown = (content: string) => {
             <tr>
               {header.map((cell, index) => (
                 <th key={`${cell}-${index}`} className="px-2 py-2 font-semibold text-foreground">
-                  {parseInline(cell)}
+                  {cell}
                 </th>
               ))}
             </tr>
@@ -156,7 +95,7 @@ const renderMarkdown = (content: string) => {
               <tr key={`row-${rowIndex}`} className="border-b border-border/60">
                 {row.map((cell, cellIndex) => (
                   <td key={`${cell}-${cellIndex}`} className="px-2 py-2">
-                    {parseInline(cell)}
+                    {cell}
                   </td>
                 ))}
               </tr>
@@ -212,16 +151,16 @@ const renderMarkdown = (content: string) => {
         const level = match[1].length;
         const text = match[2];
         const id = slugify(text);
-        const Tag = level === 1 ? "h3" : level === 2 ? "h4" : "h5";
+        const Tag = level === 1 ? "h2" : level === 2 ? "h3" : "h4";
         const className =
           level === 1
-            ? "text-xl font-semibold"
+            ? "text-2xl font-semibold"
             : level === 2
-              ? "text-lg font-semibold"
-              : "text-base font-semibold";
+              ? "text-xl font-semibold"
+              : "text-lg font-semibold";
         blocks.push(
           <Tag key={`heading-${index}`} id={id} className={className}>
-            {parseInline(text)}
+            {text}
           </Tag>
         );
       }
@@ -248,7 +187,7 @@ const renderMarkdown = (content: string) => {
           key={`quote-${blocks.length}`}
           className="border-l-2 border-primary/60 pl-4 text-sm italic text-muted-foreground"
         >
-          {parseInline(quote)}
+          {quote}
         </blockquote>
       );
       return;
@@ -319,22 +258,8 @@ const extractHeadings = (content: string) => {
 
 const BlogIndex = () => {
   const { data } = usePortfolio();
-  const chapterNav = useMemo(
-    () =>
-      data.blog.chapters.map((chapter) => ({
-        title: chapter.title,
-        id: slugify(chapter.title),
-      })),
-    [data.blog.chapters]
-  );
-  const chapterHeadings = useMemo(
-    () =>
-      data.blog.chapters.map((chapter) => ({
-        id: slugify(chapter.title),
-        headings: extractHeadings(chapter.content).filter((heading) => heading.level <= 2),
-      })),
-    [data.blog.chapters]
-  );
+  const headings = useMemo(() => extractHeadings(data.blog.content), [data.blog.content]);
+  const renderedContent = useMemo(() => renderMarkdown(data.blog.content), [data.blog.content]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -369,45 +294,24 @@ const BlogIndex = () => {
       <main className="container mx-auto space-y-12 px-6 py-10">
         <section id="navigation" className="rounded-xl border border-border bg-card/50 p-6">
           <h2 className="text-xl font-semibold">Quick Navigation</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {chapterNav.map((chapter) => (
-              <div key={chapter.id} className="space-y-2">
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {headings
+              .filter((heading) => heading.level <= 2)
+              .map((heading) => (
                 <a
-                  href={`#${chapter.id}`}
-                  className="text-sm font-semibold text-foreground transition hover:text-primary"
+                  key={heading.id}
+                  href={`#${heading.id}`}
+                  className="text-sm text-muted-foreground transition hover:text-primary"
                 >
-                  {chapter.title}
+                  {heading.text}
                 </a>
-                <div className="space-y-1">
-                  {chapterHeadings
-                    .find((item) => item.id === chapter.id)
-                    ?.headings.map((heading) => (
-                      <a
-                        key={heading.id}
-                        href={`#${heading.id}`}
-                        className="block text-xs text-muted-foreground transition hover:text-primary"
-                      >
-                        {heading.text}
-                      </a>
-                    ))}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </section>
 
-        {data.blog.chapters.map((chapter) => (
-          <section
-            key={chapter.title}
-            id={slugify(chapter.title)}
-            className="space-y-6 rounded-xl border border-border bg-card/40 p-6"
-          >
-            <div>
-              <h2 className="text-xl font-semibold">{chapter.title}</h2>
-            </div>
-            <div className="space-y-6">{renderMarkdown(chapter.content)}</div>
-          </section>
-        ))}
+        <section className="space-y-6 rounded-xl border border-border bg-card/40 p-6">
+          {renderedContent}
+        </section>
       </main>
     </div>
   );
