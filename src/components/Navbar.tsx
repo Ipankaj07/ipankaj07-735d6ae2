@@ -70,7 +70,18 @@ const Navbar = () => {
                   {item.label}
                 </motion.button>
               ))}
-              
+
+              <motion.a
+                href="/blog"
+                className="nav-link text-sm"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3 }}
+              >
+                <span className="text-primary mr-1">06.</span>
+                Blog
+              </motion.a>
+
               <motion.a
                 href="https://drive.google.com/file/d/1E1B43a768jfePZAQqVvCior3yXvTssYi/view"
                 target="_blank"
@@ -127,6 +138,10 @@ const Navbar = () => {
                 {item.label}
               </button>
             ))}
+            <a href="/blog" className="text-left text-lg nav-link">
+              <span className="text-primary mr-2">06.</span>
+              Blog
+            </a>
             <a
               href="https://drive.google.com/file/d/1E1B43a768jfePZAQqVvCior3yXvTssYi/view"
               target="_blank"
@@ -135,7 +150,7 @@ const Navbar = () => {
             >
               Resume
             </a>
-          <div className="hidden">
+            <div className="hidden">
               <ThemeSelector />
             </div>
           </div>

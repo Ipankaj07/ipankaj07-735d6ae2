@@ -73,6 +73,10 @@ const Admin = () => {
     setData((prev) => ({ ...prev, footer: { ...prev.footer, ...updates } }));
   };
 
+  const updateBlog = (updates: Partial<typeof data.blog>) => {
+    setData((prev) => ({ ...prev, blog: { ...prev.blog, ...updates } }));
+  };
+
   const keywordText = useMemo(() => data.hero.highlightKeywords.join("\n"), [data.hero.highlightKeywords]);
   const marqueeText = useMemo(() => data.skills.marquee.join("\n"), [data.skills.marquee]);
 
@@ -104,6 +108,45 @@ const Admin = () => {
           </div>
         </header>
         <ThemeSelector />
+
+        <section className={sectionClassName}>
+          <h2 className="text-xl font-semibold">Blog</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="space-y-2">
+              <span className="text-sm text-muted-foreground">Title</span>
+              <input
+                className={inputClassName}
+                value={data.blog.title}
+                onChange={(event) => updateBlog({ title: event.target.value })}
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="text-sm text-muted-foreground">Subtitle</span>
+              <input
+                className={inputClassName}
+                value={data.blog.subtitle}
+                onChange={(event) => updateBlog({ subtitle: event.target.value })}
+              />
+            </label>
+            <label className="space-y-2 md:col-span-2">
+              <span className="text-sm text-muted-foreground">Tagline</span>
+              <input
+                className={inputClassName}
+                value={data.blog.tagline}
+                onChange={(event) => updateBlog({ tagline: event.target.value })}
+              />
+            </label>
+            <label className="space-y-2 md:col-span-2">
+              <span className="text-sm text-muted-foreground">Markdown content</span>
+              <textarea
+                className={textareaClassName}
+                rows={16}
+                value={data.blog.content}
+                onChange={(event) => updateBlog({ content: event.target.value })}
+              />
+            </label>
+          </div>
+        </section>
 
         <section className={sectionClassName}>
           <h2 className="text-xl font-semibold">Hero</h2>
