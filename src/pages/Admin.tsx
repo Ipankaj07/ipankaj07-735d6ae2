@@ -73,6 +73,10 @@ const Admin = () => {
     setData((prev) => ({ ...prev, footer: { ...prev.footer, ...updates } }));
   };
 
+  const updateBlog = (updates: Partial<typeof data.blog>) => {
+    setData((prev) => ({ ...prev, blog: { ...prev.blog, ...updates } }));
+  };
+
   const keywordText = useMemo(() => data.hero.highlightKeywords.join("\n"), [data.hero.highlightKeywords]);
   const marqueeText = useMemo(() => data.skills.marquee.join("\n"), [data.skills.marquee]);
 
@@ -104,6 +108,95 @@ const Admin = () => {
           </div>
         </header>
         <ThemeSelector />
+
+        <section className={sectionClassName}>
+          <h2 className="text-xl font-semibold">Blog</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="space-y-2">
+              <span className="text-sm text-muted-foreground">Title</span>
+              <input
+                className={inputClassName}
+                value={data.blog.title}
+                onChange={(event) => updateBlog({ title: event.target.value })}
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="text-sm text-muted-foreground">Subtitle</span>
+              <input
+                className={inputClassName}
+                value={data.blog.subtitle}
+                onChange={(event) => updateBlog({ subtitle: event.target.value })}
+              />
+            </label>
+            <label className="space-y-2 md:col-span-2">
+              <span className="text-sm text-muted-foreground">Tagline</span>
+              <input
+                className={inputClassName}
+                value={data.blog.tagline}
+                onChange={(event) => updateBlog({ tagline: event.target.value })}
+              />
+            </label>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold">Chapters</h3>
+              <button
+                type="button"
+                onClick={() =>
+                  updateBlog({
+                    chapters: [
+                      ...data.blog.chapters,
+                      { title: "New Chapter", content: "## New Section\\n\\nAdd details here." },
+                    ],
+                  })
+                }
+                className="text-xs text-primary"
+              >
+                + Add chapter
+              </button>
+            </div>
+            {data.blog.chapters.map((chapter, index) => (
+              <div key={`${chapter.title}-${index}`} className="space-y-3 rounded-md border border-border/60 p-4">
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                  <label className="space-y-2 md:flex-1">
+                    <span className="text-sm text-muted-foreground">Chapter title</span>
+                    <input
+                      className={inputClassName}
+                      value={chapter.title}
+                      onChange={(event) => {
+                        const next = [...data.blog.chapters];
+                        next[index] = { ...chapter, title: event.target.value };
+                        updateBlog({ chapters: next });
+                      }}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateBlog({ chapters: data.blog.chapters.filter((_, idx) => idx !== index) })
+                    }
+                    className="text-xs text-destructive"
+                  >
+                    Remove chapter
+                  </button>
+                </div>
+                <label className="space-y-2">
+                  <span className="text-sm text-muted-foreground">Markdown content</span>
+                  <textarea
+                    className={textareaClassName}
+                    rows={14}
+                    value={chapter.content}
+                    onChange={(event) => {
+                      const next = [...data.blog.chapters];
+                      next[index] = { ...chapter, content: event.target.value };
+                      updateBlog({ chapters: next });
+                    }}
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className={sectionClassName}>
           <h2 className="text-xl font-semibold">Hero</h2>
